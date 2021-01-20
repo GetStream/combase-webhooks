@@ -1,0 +1,10 @@
+{
+    "name": "utils",
+    "version": "0.1.0",
+    "description": "Combase Webhook Utils",
+    "main": "src/index.js",
+    "author": "Stream",
+    "license": "MIT",
+	"type": "module",
+	"private": true
+}

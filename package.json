@@ -1,0 +1,26 @@
+{
+	"name": "combase-webhooks",
+	"version": "0.1.0",
+	"description": "Combase Webhook Monorepo • Contains Ingress and Worker.",
+	"author": "Stream",
+	"license": "MIT",
+	"private": true,
+	"workspaces": {
+		"packages": [
+			"packages/*"
+		]
+	},
+	"scripts": {
+		"start:ingress": "yarn workspace ingress start",
+		"start:worker": "yarn workspace worker start",
+		"docker:build": "docker-compose build",
+		"docker:run": "docker-compose up -d --scale app=10"
+	},
+	"devDependencies": {
+		"@babel/runtime": "^7.12.5",
+		"@captain-hook/core": "^0.3.4",
+		"@captain-hook/rascal-engine": "^0.1.5",
+		"@captain-hook/source-changestreams": "^0.1.9",
+		"dotenv": "^8.2.0"
+	}
+}

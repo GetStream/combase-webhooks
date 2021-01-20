@@ -1,0 +1,22 @@
+{
+    "name": "ingress",
+    "version": "0.1.0",
+    "description": "Combase Webhook Ingress",
+    "main": "src/main.js",
+    "author": "Stream",
+    "license": "MIT",
+	"type": "module",
+	"private": true,
+    "dependencies": {
+		"@babel/runtime": "^7.12.5",
+		"@captain-hook/core": "^0.3.4",
+		"@captain-hook/rascal-engine": "^0.1.5",
+		"@captain-hook/source-changestreams": "^0.1.9",
+        "express": "^4.17.1",
+        "mongoose": "^5.11.12",
+		"utils": "*"
+    },
+    "scripts": {
+        "start": "node --es-module-specifier-resolution=node ./src/main.js"
+    }
+}
