@@ -2,7 +2,8 @@
 	"name": "ingress",
 	"version": "0.1.0",
 	"description": "Combase Webhook Ingress",
-	"main": "src/main.js",
+	"main": "main.js",
+	"module": "main.js",
 	"author": "Stream",
 	"license": "MIT",
 	"type": "module",
@@ -23,7 +24,7 @@
 		"utils": "*"
 	},
 	"scripts": {
-		"start": "node --es-module-specifier-resolution=node ./src/main.js",
+		"start": "node --es-module-specifier-resolution=node main.js",
 		"expose": "node ngrok.js"
 	}
 }

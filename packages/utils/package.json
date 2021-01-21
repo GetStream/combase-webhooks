@@ -2,9 +2,13 @@
     "name": "utils",
     "version": "0.1.0",
     "description": "Combase Webhook Utils",
-    "main": "src/index.js",
+    "main": "index.js",
+    "module": "index.js",
     "author": "Stream",
     "license": "MIT",
 	"type": "module",
+	"engines": {
+		"node": ">=15.x"
+	},
 	"private": true
 }

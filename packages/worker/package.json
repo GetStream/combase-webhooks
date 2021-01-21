@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"description": "Combase Webhook Worker Module",
 	"main": "src/main.js",
+	"module": "src/main.js",
 	"author": "Stream",
 	"license": "MIT",
 	"type": "module",
