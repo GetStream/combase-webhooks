@@ -1,15 +1,15 @@
-import { gql } from './graphqlClient';
+import { graphql, logger } from 'utils';
 
-export const createPlugin = pluginTriggerMap =>
+export const createPlugin = plugin =>
 	class CombaseEcosystemPlugin {
 		constructor(capn) {
 			this.capn = capn;
-			this.triggers = Object.keys(pluginTriggerMap);
+			this.triggers = Object.keys(plugin.triggers);
 
-			Object.entries(pluginTriggerMap)
+			Object.entries(plugin.triggers)
 				.filter(([trigger, method]) => trigger && method)
 				.forEach(([trigger, method]) => {
-					this[trigger] = method;
+					this[trigger] = plugin.pluginModule[method];
 				});
 
 			this.listen();
@@ -32,16 +32,20 @@ export const createPlugin = pluginTriggerMap =>
 
 		actions(event) {
 			return {
-				request: (document, variables) => gql.request(document, variables, this.authenticateRequest(event)),
+				request: (document, variables) => graphql.request(document, variables, this.authenticateRequest(event)),
 			};
 		}
 
 		listen = async () => {
 			for await (const event of this.capn.listen(this.triggers)) {
 				try {
-					await this[event.trigger]?.(event, this.actions(event));
+					if (this[event.trigger]) {
+						await this[event.trigger](event, this.actions(event));
+					} else {
+						console.log(this);
+					}
 				} catch (error) {
-					console.error(error);
+					logger.error(error);
 				}
 			}
 		};

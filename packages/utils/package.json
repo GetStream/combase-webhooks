@@ -10,5 +10,10 @@
 	"engines": {
 		"node": ">=15.x"
 	},
+	"dependencies": {
+		"graphql": "^15.4.0",
+		"graphql-request": "^3.4.0",
+		"pino": "^6.11.0"
+	},
 	"private": true
 }

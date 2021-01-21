@@ -1,1 +1,1 @@
-export { createEcosystemPlugins } from './createEcosystemPlugins';
+export * from './createEcosystemPlugins';

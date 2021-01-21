@@ -13,16 +13,16 @@
 		"@captain-hook/rascal-engine": "^0.1.5",
 		"deepmerge": "^4.2.2",
 		"fs-extra": "^9.1.0",
-		"graphql": "^15.4.0",
-		"graphql-request": "^3.4.0",
 		"slash": "^3.0.0",
 		"utils": "*",
 		"uuid": "^8.3.2"
 	},
 	"scripts": {
+		"clean": "rm -rf .data",
 		"docker:build": "docker-compose build",
 		"docker:run": "docker-compose up -d --scale app=10",
 		"prep": "node --es-module-specifier-resolution=node ./scripts/prepare",
+		"prestart": "yarn prep",
 		"start": "node --es-module-specifier-resolution=node ./src/main.js"
 	}
 }

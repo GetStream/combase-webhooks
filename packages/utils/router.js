@@ -44,11 +44,11 @@ export class Router {
             headers: data.headers,
             originHost: data.get('origin') || data.get('host'),
         },
-        trigger: 'capn.event',
+        trigger: 'email.receive',
     });
 
     route = data => {
-        let payload;
+		let payload;
 
         switch (data.source) {
             case 'changestream':
