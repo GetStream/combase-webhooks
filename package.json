@@ -9,6 +9,9 @@
 			"packages/*"
 		]
 	},
+	"engines": {
+		"node": ">=15.x"
+	},
 	"scripts": {
 		"start:ingress": "yarn workspace ingress start",
 		"dev:ingress": "concurrently \"yarn start:ingress\" \"yarn workspace ingress expose\"",
