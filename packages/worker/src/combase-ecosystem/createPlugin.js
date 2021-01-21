@@ -17,14 +17,9 @@ export const createPlugin = plugin =>
 
 		authenticateRequest = event => {
 			const headers = {};
-			const org = event?.data?.fullDocument?.organization;
 
-			/**
-			 * ? We can potentially create a scoped JWT here.
-			 */
-
-			if (org) {
-				headers['combase-organization'] = org.toString();
+			if (event.data.organization) {
+				headers['combase-organization'] = event.data.organization.toString();
 			}
 
 			return headers;

@@ -17,32 +17,25 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@captain-hook/core@^0.3.4", "@captain-hook/core@^0.3.5":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@captain-hook/core/-/core-0.3.5.tgz#4b0b10c75f2c7db754b1290b8ee03b29c81aa260"
-  integrity sha512-PocXqu2yzZi+6pHx193fRPONdaGDCQuDtzeWtDDWomfOYdCVATLOFMi5Lv6LQfcOLVJ2ozPN9VWMMXLXif2OWg==
-  dependencies:
-    "@captain-hook/events-engine" "^0.1.11"
+"@captain-hook/core@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@captain-hook/core/-/core-0.3.6.tgz#0307c55ee729b3498b7c9a79ba45801215483efd"
+  integrity sha512-joh3gC5jndQpI0JLwqs0fqJ4My1Bu3ihNgX2BiHFCbudikquElS6WWhO5AyfyNPAQqNZBjM72iNJj/e3NKKYaw==
 
-"@captain-hook/events-engine@^0.1.11":
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/@captain-hook/events-engine/-/events-engine-0.1.11.tgz#5a61a3f3e26940b5f105eafbed0a3cb4b93c0b5a"
-  integrity sha512-d1YxEc7qPVgsLm3js02kQWx+FiJcmDSsCSLMEBRj6bXyznepmFaWlnaGJrbsjwDAuJX4iuRmajaViCYk8GbCVQ==
-
-"@captain-hook/rascal-engine@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@captain-hook/rascal-engine/-/rascal-engine-0.1.5.tgz#30a459b057027a020d7c3d07edb02bee485885fa"
-  integrity sha512-TAliedq17x3DKVIjnZgUW+Pps2mkACmiMpitt0r3M/T3MwV9GEbyYNig6u2Ff5KQCXuTFNkV1k1agBO6Yo3ahQ==
+"@captain-hook/rascal-engine@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@captain-hook/rascal-engine/-/rascal-engine-0.1.6.tgz#62578448edf8661374f3dfcc699fd6a5d9d244f6"
+  integrity sha512-PYEggbxq2wJtGdq0oZ+9AtXqqPHNlZfOIisfeTgTz4nMhO4To2hdLZZAHStAPl7kMFxElgUNleIgTUOMeBtW9g==
   dependencies:
     amqplib "^0.6.0"
     rascal "^12.0.1"
 
-"@captain-hook/source-changestreams@^0.1.9":
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/@captain-hook/source-changestreams/-/source-changestreams-0.1.10.tgz#21c4091eb962fa83b9a1d9149bea252fa5d5b2f2"
-  integrity sha512-iSHRvY9B8JiLV+6J9UxnYVqgdfPeL2wzNdImAofauMKXBP0Yj3I1UhTafP/AwnGB2B0bBpj73KLMR10tftmv8Q==
+"@captain-hook/source-changestreams@^0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@captain-hook/source-changestreams/-/source-changestreams-0.1.11.tgz#8bbe51408b4f2d528d9c90d817c6e73ec03947d2"
+  integrity sha512-+8ZwE82kRBhWrttdXuZoKvZpckI1EdrMMSrmdBdvFuTZpDAEv++CPB3us0ixc8fwdILsLWv/K4ZEMZA2BL2sdw==
   dependencies:
-    "@captain-hook/core" "^0.3.5"
+    "@captain-hook/core" "^0.3.6"
     changestream-iterator "^0.1.4"
 
 "@sindresorhus/is@^0.14.0":
@@ -1483,7 +1476,7 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.11.12:
+mongoose@^5.11.13:
   version "5.11.13"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.13.tgz#1a8af3c83152d5e0427509966926ea7f5ead4d66"
   integrity sha512-rXbaxSJfLnKKO2RTm8MKt65glrtfKDc4ATEb6vEbbzsVGCiLut753K5axdpyvE7KeTH7GOh4LzmuQLOvaaWOmA==

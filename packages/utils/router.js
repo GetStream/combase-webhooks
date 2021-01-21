@@ -2,18 +2,23 @@ import 'dotenv/config';
 import Rascal from 'rascal';
 
 import { mongoOperationToTrigger } from './mongoOperationToTrigger';
+import { webhookEventToTrigger } from './webhookEventToTrigger';
 
 const vhost = process.env.CLOUD_AMQP_VHOST;
 const connection = `amqps://${vhost}:${process.env.CLOUD_AMQP_ID}.rmq.cloudamqp.com/${vhost}`;
 
-/**
- * CaptainHook router to parse incoming events into the correct event queues by return an object or array of objects that include a trigger property.
- * The trigger property is then used as the routingKey in RabbitMQ/Rascal. 
+/** 
+ * For Combase, all events must contain data.organization with the org id for the request 
+ * Having this be the routers job allows us to grab the org id from different locations in the payload depending on the type of request:
+ * A simple example is - we get the orgID from data.body.fullDocument.organization for changestream events - whereas webhook events may
+ * contain the org id somewhere deep within the data ( e.g. SendGrid: `data.body.to.split('@')[0]` ).
+ * 
+ * ! the returned object (or every object of the returned array) should always contain a `trigger` property at the top-level. (i.e. event.trigger, not event.data.trigger)
  */
 export class Router {
     validateTrigger = () => true;
 
-    createEventOperationChangeStream = ({ _id: _, clusterTime: __, operationType, ns: { coll: collectionName }, documentKey: { _id }, ...rest }) => {
+    createEventFromChangeStream = ({ _id: _, clusterTime: __, operationType, ns: { coll: collectionName }, documentKey: { _id }, ...rest }) => {
         const trigger = mongoOperationToTrigger(collectionName, operationType);
 
         if (!trigger) {
@@ -41,10 +46,11 @@ export class Router {
         data: {
             body: data.body,
             query: data.query,
-            headers: data.headers,
+			headers: data.headers,
+			source: data.source,
             originHost: data.get('origin') || data.get('host'),
         },
-        trigger: 'email.receive',
+        trigger: webhookEventToTrigger(data),
     });
 
     route = data => {
@@ -52,7 +58,7 @@ export class Router {
 
         switch (data.source) {
             case 'changestream':
-                payload = this.createEventOperationChangeStream(data);
+                payload = this.createEventFromChangeStream(data);
 
                 break;
 
