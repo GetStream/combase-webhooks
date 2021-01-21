@@ -7,9 +7,6 @@
 	"author": "Stream",
 	"license": "MIT",
 	"type": "module",
-	"engines": {
-		"node": ">=15.x"
-	},
 	"private": true,
 	"dependencies": {
 		"@babel/runtime": "^7.12.5",

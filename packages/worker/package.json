@@ -7,9 +7,6 @@
 	"author": "Stream",
 	"license": "MIT",
 	"type": "module",
-	"engines": {
-		"node": ">=15.x"
-	},
 	"private": true,
 	"dependencies": {
 		"@captain-hook/core": "^0.3.4",
