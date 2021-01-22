@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { Router } from 'utils';
+import { Router, publisherConfig } from 'utils';
 import { CaptainHook } from '@captain-hook/core';
 import { createRascalEngine } from '@captain-hook/rascal-engine';
 import { createChangeStreamSource } from '@captain-hook/source-changestreams';
@@ -16,7 +16,7 @@ const mongo = await mongoose.connect(process.env.MONGODB_URI, {
 
 const router = new Router();
 
-const CaptainRascalEngine = await createRascalEngine(Router.createRascalConfig());
+const CaptainRascalEngine = await createRascalEngine(publisherConfig);
 
 export const capn = new CaptainHook({
     engine: CaptainRascalEngine,

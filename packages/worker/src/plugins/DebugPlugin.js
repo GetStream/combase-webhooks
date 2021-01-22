@@ -6,8 +6,8 @@ export class DebugPlugin {
     }
 
     listen = async () => {
-        for await (const event of this.capn.listen('capn:event')) {
-            // eslint-disable-next-line no-console
+        for await (const event of this.capn.listen('email.receive')) {
+            // eslint-disable-next-line no-console§
             console.log('received event', event.trigger);
         }
     };

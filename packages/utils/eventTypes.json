@@ -1,13 +1,14 @@
 {
 	"agent": ["created", "deleted", "updated"],
 	"asset": ["created", "deleted", "updated"],
+	"email": ["receive"],
 	"faq": ["created", "deleted", "updated"],
 	"group": ["created", "deleted", "updated"],
 	"integration": ["created", "deleted", "updated"],
 	"note": ["created", "deleted", "updated"],
 	"organization": ["created", "deleted", "updated"],
 	"tag": ["created", "deleted", "updated"],
-	"ticket": ["created", "deleted", "updated", "archived", "labelled", "assigned"],
+	"ticket": ["created", "deleted", "updated", "archived", "labelled", "assigned", "tagged"],
 	"user": ["created", "deleted", "updated"],
-	"webhook": ["created", "deleted", "updated"],
-};
+	"webhook": ["created", "deleted", "updated"]
+}

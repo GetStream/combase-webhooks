@@ -32,15 +32,15 @@ export const createPlugin = plugin =>
 		}
 
 		listen = async () => {
+			let i = 0;
 			for await (const event of this.capn.listen(this.triggers)) {
-				try {
-					if (this[event.trigger]) {
-						await this[event.trigger](event, this.actions(event));
-					} else {
-						console.log(this);
-					}
-				} catch (error) {
-					logger.error(error);
+				console.log(i);
+				if (typeof this[event.trigger] === 'function') {
+					await this[event.trigger](event, this.actions(event));
+					i++;
+				}else {
+					// TODO Throwing here should nack.
+					throw new Error({ recoverable: true }); // TODO implement check for recoverable in RascalIterator and send to dead_letters if falsy
 				}
 			}
 		};

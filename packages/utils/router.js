@@ -1,6 +1,4 @@
 import 'dotenv/config';
-import Rascal from 'rascal';
-
 import { mongoOperationToTrigger } from './mongoOperationToTrigger';
 import { webhookEventToTrigger } from './webhookEventToTrigger';
 
@@ -37,7 +35,8 @@ export class Router {
             data: {
                 body: rest,
                 _id,
-            },
+			},
+			organization: rest.fullDocument?.organization?.toString?.(),
             trigger,
         };
     };
@@ -49,7 +48,8 @@ export class Router {
 			headers: data.headers,
 			source: data.source,
             originHost: data.get('origin') || data.get('host'),
-        },
+		},
+		organization: '', // TODO: We need to grab this from the request itself. Doing it in the router allows us to discern the org id at the same time as the trigger.
         trigger: webhookEventToTrigger(data),
     });
 
@@ -77,110 +77,4 @@ export class Router {
 
         return payload;
     };
-
-	static createRascalConfig() {
-		return Rascal.withDefaultConfig({
-			vhosts: {
-				[vhost]: {
-					connection,
-					exchanges: [
-						'events', // events queue
-						'delay', // To delay failed messages before a retry
-						'retry', // To retry failed messages up to maximum number of times
-						'dead_letters', // When retrying fails, messages end up here
-					],
-					queues: {
-						'capn:events:q1': {
-							assert: true,
-							check: true,
-							options: {
-								durable: true,
-							},
-						},
-						'capn:delay:1m': {
-							assert: true,
-							options: {
-								arguments: {
-									// Configure messages to expire after 1 minute, then route them to the retry exchange
-									'x-message-ttl': 60000,
-									'x-dead-letter-exchange': 'retry',
-								},
-							},
-						},
-						'capn:dead_letters:q1': {
-							assert: true,
-						},
-					},
-					bindings: {
-						// Route all events messages to the Capn Events queue
-						'events[*.*] -> capn:events:q1': {},
-						// Route delayed messages to the 1 minute delay queue
-						'delay[delay.1m] -> capn:delay:1m': {},
-						// Route retried messages back into the events queue using the CC routing keys set by Rascal
-						'retry[*.*] -> capn:events:q1': {},
-						// Route dead letters the dead letter queue
-						'dead_letters[*.*] -> capn:dead_letters:q1': {},
-					},
-					publications: {
-						'capn:event': {
-							exchange: 'events',
-						},
-						'capn:retry': {
-							exchange: 'delay',
-							options: {
-								CC: ['delay.1m'],
-							},
-						},
-					},
-					subscriptions: {
-						'capn:event': {
-							vhost,
-							queue: 'capn:events:q1',
-							contentType: 'application/json',
-							redeliveries: {
-								limit: 5,
-								counter: 'shared',
-							},
-						},
-					},
-				},
-			},
-			// Define recovery strategies for different error scenarios
-			recovery: {
-				// Deferred retry is a good strategy for temporary (connection timeout) or unknown errors
-				deferred_retry: [
-					{
-						strategy: 'forward',
-						attempts: 5,
-						publication: 'capn:retry',
-						xDeathFix: true, // See https://github.com/rabbitmq/rabbitmq-server/issues/161
-					},
-					{
-						strategy: 'nack',
-					},
-				],
-
-				/*
-				* Republishing with immediate nack returns the message to the original queue but decorates
-				* it with error headers. The next time Rascal encounters the message it immediately nacks it
-				* causing it to be routed to the services dead letter queue
-				*/
-				dead_letter: [
-					{
-						strategy: 'republish',
-						immediateNack: true,
-					},
-				],
-			},
-			// Define counter(s) for counting redeliveries
-			redeliveries: {
-				counters: {
-					shared: {
-						size: 10,
-						type: 'inMemory',
-					},
-				},
-			},
-		});
-	}
 }
