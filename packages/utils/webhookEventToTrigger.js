@@ -5,7 +5,7 @@ export const webhookEventToTrigger = (data) => {
 		// Handle Webhook ID:
 		// Go to mongo
 	} else if (data.query.trigger) {
-		trigger = data.query.trigger;
+		trigger = data.query.trigger || 'email.receive';
 	}
 
 	return trigger;

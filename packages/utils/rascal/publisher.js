@@ -1,6 +1,6 @@
 import Rascal from 'rascal';
-
-import { vhost, connection, triggers } from './constants';
+import { v4 as uuid } from 'uuid';
+import { exchanges, vhost, connection, triggers } from './constants';
 
 let publications = {};
 
@@ -14,12 +14,7 @@ export const publisherConfig = Rascal.withDefaultConfig({
 	vhosts: {
 		[vhost]: {
 			connection,
-			exchanges: [
-				"events",
-				"delay",
-				"retry",
-				"dead_letter"
-			],
+			exchanges,
 			publications: {
 				...publications,
 				'combase:retry': {

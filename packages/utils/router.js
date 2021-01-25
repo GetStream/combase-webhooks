@@ -2,9 +2,6 @@ import 'dotenv/config';
 import { mongoOperationToTrigger } from './mongoOperationToTrigger';
 import { webhookEventToTrigger } from './webhookEventToTrigger';
 
-const vhost = process.env.CLOUD_AMQP_VHOST;
-const connection = `amqps://${vhost}:${process.env.CLOUD_AMQP_ID}.rmq.cloudamqp.com/${vhost}`;
-
 /** 
  * For Combase, all events must contain data.organization with the org id for the request 
  * Having this be the routers job allows us to grab the org id from different locations in the payload depending on the type of request:
@@ -49,7 +46,7 @@ export class Router {
 			source: data.source,
             originHost: data.get('origin') || data.get('host'),
 		},
-		organization: '', // TODO: We need to grab this from the request itself. Doing it in the router allows us to discern the org id at the same time as the trigger.
+		organization: data.body.to.replace('@parse.combase.app', ''), // TODO: We need to grab this from the request itself. Doing it in the router allows us to discern the org id at the same time as the trigger.
         trigger: webhookEventToTrigger(data),
     });
 

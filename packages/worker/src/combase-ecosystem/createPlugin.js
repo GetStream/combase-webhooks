@@ -33,14 +33,19 @@ export const createPlugin = plugin =>
 
 		listen = async () => {
 			let i = 0;
-			for await (const event of this.capn.listen(this.triggers)) {
+			for await (const [event, ackOrNack] of this.capn.listen(this.triggers)) {
 				console.log(i);
-				if (typeof this[event.trigger] === 'function') {
-					await this[event.trigger](event, this.actions(event));
-					i++;
-				}else {
-					// TODO Throwing here should nack.
-					throw new Error({ recoverable: true }); // TODO implement check for recoverable in RascalIterator and send to dead_letters if falsy
+				try {
+					if (typeof this[event.trigger] === 'function') {
+						await this[event.trigger](event, this.actions(event));
+						i++;
+						ackOrNack();
+					} else {
+						throw new Error('Event was not consumed.');
+					}
+				} catch (error) { 
+					// TODO: Currently just throws the message to the deferred_retry recovery strategy - we should check the error and conditionally send to dead_letter immediately if applicable.
+					ackOrNack(error, this.engine.broker.config.recovery.deferred_retry);
 				}
 			}
 		};

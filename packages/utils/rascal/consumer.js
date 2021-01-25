@@ -1,17 +1,15 @@
 import Rascal from 'rascal';
-import os from 'os';
 
-import { vhost, connection, triggers } from './constants';
+import { exchanges, vhost, connection, triggers } from './constants';
 
-const queue = os.hostname();
+const queue = 'combase:events';
 
 const queues = {
 	[queue]: {
 		assert: true,
 		check: true,
 		options: {
-			durable: false,
-			exclusive: true,
+			durable: true,
 		},
 	}
 };
@@ -39,12 +37,7 @@ export const consumerConfig = Rascal.withDefaultConfig({
 	vhosts: {
 		[vhost]: {
 			connection,
-			exchanges: [
-				'events', // events exchange
-				'delay', // To delay failed messages before a retry
-				'retry', // To retry failed messages up to maximum number of times
-				'dead_letter', // When retrying fails, messages end up here
-			],
+			exchanges,
 			queues: {
 				...queues,
 				'combase:delay:1m': {
