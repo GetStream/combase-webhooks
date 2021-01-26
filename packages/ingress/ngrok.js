@@ -1,6 +1,6 @@
 import 'dotenv/config.js';
 import ngrok from 'ngrok';
-import open from 'open';
+import { logger } from 'utils';
 
 try {
 	const url = await ngrok.connect({
@@ -10,7 +10,7 @@ try {
 		authtoken: process.env.NGROK_AUTH_TOKEN,
 	});
 
-	await open(ngrok.getUrl());
+	logger.info(`NGROK: ${ngrok.getUrl()}`)
 
 	async function cleanup() {
 		await ngrok.kill(url);
