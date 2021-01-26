@@ -10,5 +10,6 @@
 	"tag": ["created", "deleted", "updated"],
 	"ticket": ["created", "deleted", "updated", "archived", "labelled", "assigned", "tagged"],
 	"user": ["created", "deleted", "updated"],
-	"webhook": ["created", "deleted", "updated"]
+	"webhook": ["created", "deleted", "updated"],
+	"zendesk": ["sync"]
 }

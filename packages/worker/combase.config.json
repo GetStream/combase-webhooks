@@ -1,6 +1,7 @@
 {
 	"plugins": [
 		"@combase.app/plugin-sendgrid",
-		"@combase.app/plugin-autorouting"
+		"@combase.app/plugin-autorouting",
+		"@combase.app/plugin-zendesk"
 	]
 }

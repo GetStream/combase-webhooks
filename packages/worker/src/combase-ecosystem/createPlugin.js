@@ -1,4 +1,5 @@
 import { graphql, logger } from 'utils';
+import gql from 'graphql-tag';
 
 export const createPlugin = plugins =>
 	class CombaseEcosystemPlugin {
@@ -25,6 +26,7 @@ export const createPlugin = plugins =>
 
 		actions(event) {
 			return {
+				gql,
 				log: logger,
 				request: (document, variables) => graphql.request(document, variables, this.authenticateRequest(event)),
 			};
@@ -46,7 +48,7 @@ export const createPlugin = plugins =>
 						throw new Object({ canRetry, message });
 					}
 				} catch (error) { 
-					logger.error(error.message)
+					console.log(`${event.trigger} • ${error.message}`)
 					if (error?.canRetry) {
 						// TODO: Currently just throws the message to the deferred_retry recovery strategy - we should check the error and conditionally send to dead_letter immediately if applicable.
 						ackOrNack(error, this.capn.engine.broker.config.recovery.deferred_retry);

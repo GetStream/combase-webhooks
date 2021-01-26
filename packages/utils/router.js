@@ -40,18 +40,21 @@ export class Router {
         };
     };
 
-    createEventFromWebhook = data => ({
-        data: {
-            body: data.body,
-            query: data.query,
-			headers: data.headers,
-			source: data.source,
-            originHost: data.get('origin') || data.get('host'),
-		},
-		...combaseWebhookParser(data),
-    });
+    createEventFromWebhook = async data => {
+		const eventMeta = await combaseWebhookParser(data);
+		return {
+			data: {
+				body: data.body,
+				query: data.query,
+				headers: data.headers,
+				source: data.source,
+				originHost: data.get('origin') || data.get('host'),
+			},
+			...eventMeta,
+		}
+	};
 
-    route = data => {
+    route = async data => {
 		let payload;
 
         switch (data.source) {
@@ -60,9 +63,8 @@ export class Router {
 
                 break;
 
-            case 'webhook':
             default:
-                payload = this.createEventFromWebhook(data);
+                payload = await this.createEventFromWebhook(data);
 
                 break;
         }
@@ -72,7 +74,6 @@ export class Router {
          * or an array of event objects
          * Event objects must have a `type` property
          */
-
         return payload;
     };
 }
