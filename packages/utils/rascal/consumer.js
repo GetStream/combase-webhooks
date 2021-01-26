@@ -58,8 +58,7 @@ export const consumerConfig = Rascal.withDefaultConfig({
 				...bindings,
 				// Route delayed messages to the 1 minute delay queue
 				'delay[delay.1m] -> combase:delay:1m': {},
-				// Route retried messages back into the events queue using the CC routing keys set by Rascal
-				// Route dead letters the dead letter queue
+				// Route dead letters to the dead letter queue
 				'dead_letter[*.*] -> combase:dead_letter:q1': {},
 			},
 			subscriptions: {

@@ -10,9 +10,11 @@ export const mongoOperationToTrigger = (collectionName, operationType, { updateD
         }
 
         case 'update': {
-			if (triggerCollection === 'ticket' && updateDescription?.updatedFields?.status === 'open') {
-				triggerOperation = 'assigned';
-				break;
+			if (triggerCollection === 'ticket') {
+				if (updateDescription?.updatedFields?.status === 'open') {
+					triggerOperation = 'assigned';
+					break;
+				}
 			}
 
             triggerOperation = 'updated';
