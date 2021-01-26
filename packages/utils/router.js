@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { mongoOperationToTrigger } from './mongoOperationToTrigger';
-import { webhookEventToTrigger } from './webhookEventToTrigger';
+import { combaseWebhookParser } from './combaseWebhookParser';
 
 /** 
  * For Combase, all events must contain data.organization with the org id for the request 
@@ -9,6 +9,8 @@ import { webhookEventToTrigger } from './webhookEventToTrigger';
  * contain the org id somewhere deep within the data ( e.g. SendGrid: `data.body.to.split('@')[0]` ).
  * 
  * ! the returned object (or every object of the returned array) should always contain a `trigger` property at the top-level. (i.e. event.trigger, not event.data.trigger)
+ * 
+ * ! The router is only used on the ingress.
  */
 export class Router {
     validateTrigger = () => true;
@@ -46,8 +48,7 @@ export class Router {
 			source: data.source,
             originHost: data.get('origin') || data.get('host'),
 		},
-		organization: data.body.to.replace('@parse.combase.app', ''), // TODO: We need to grab this from the request itself. Doing it in the router allows us to discern the org id at the same time as the trigger.
-        trigger: webhookEventToTrigger(data),
+		...combaseWebhookParser(data),
     });
 
     route = data => {
