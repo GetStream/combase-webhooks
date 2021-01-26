@@ -17,5 +17,21 @@ export const createEcosystemPlugins = async () => {
 		}
 	}));
 
-	return pluginConfigs.map(createPlugin);
+	const plugins = {};
+	pluginConfigs.forEach((plugin) => {
+		Object.entries(plugin.triggers)
+			.filter(([trigger, method]) => trigger && method)
+			.forEach(([trigger, method]) => {
+				let cb = plugin?.pluginModule?.[method];
+				if (cb) {
+					if (!plugins[trigger]) {
+						plugins[trigger] = [cb]
+					} else if (plugins[trigger].length) {
+						plugins[trigger].push(cb)
+					};
+				}
+			});
+	})
+
+	return [createPlugin(plugins)]
 };

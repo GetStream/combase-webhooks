@@ -16,7 +16,7 @@ export class Router {
     validateTrigger = () => true;
 
     createEventFromChangeStream = ({ _id: _, clusterTime: __, operationType, ns: { coll: collectionName }, documentKey: { _id }, ...rest }) => {
-        const trigger = mongoOperationToTrigger(collectionName, operationType);
+        const trigger = mongoOperationToTrigger(collectionName, operationType, rest);
 
         if (!trigger) {
             // eslint-disable-next-line no-console

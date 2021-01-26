@@ -1,4 +1,4 @@
-export const mongoOperationToTrigger = (collectionName, operationType) => {
+export const mongoOperationToTrigger = (collectionName, operationType, { updateDescription }) => {
     let triggerOperation;
     const triggerCollection = collectionName.endsWith('s') ? collectionName.slice(0, collectionName.length - 1) : collectionName;
 
@@ -10,6 +10,11 @@ export const mongoOperationToTrigger = (collectionName, operationType) => {
         }
 
         case 'update': {
+			if (triggerCollection === 'ticket' && updateDescription?.updatedFields?.status === 'open') {
+				triggerOperation = 'assigned';
+				break;
+			}
+
             triggerOperation = 'updated';
 
             break;

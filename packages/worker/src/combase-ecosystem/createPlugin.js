@@ -1,15 +1,13 @@
 import { graphql, logger } from 'utils';
 
-export const createPlugin = plugin =>
+export const createPlugin = plugins =>
 	class CombaseEcosystemPlugin {
 		constructor(capn) {
 			this.capn = capn;
-			this.triggers = Object.keys(plugin.triggers);
+			this.triggers = Object.keys(plugins);
 
-			Object.entries(plugin.triggers)
-				.filter(([trigger, method]) => trigger && method)
-				.forEach(([trigger, method]) => {
-					this[trigger] = plugin.pluginModule[method];
+			Object.entries(plugins).forEach(([trigger, method]) => {
+					this[trigger] = method;
 				});
 
 			this.listen();
@@ -38,6 +36,10 @@ export const createPlugin = plugin =>
 				try {
 					if (typeof this[event.trigger] === 'function') {
 						await this[event.trigger](event, this.actions(event));
+						i++;
+						ackOrNack();
+					} else if (Array.isArray(this[event.trigger])) {
+						await Promise.all(this[event.trigger].map(fn => fn(event, this.actions(event))));
 						i++;
 						ackOrNack();
 					} else {
