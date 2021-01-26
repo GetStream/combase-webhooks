@@ -18,8 +18,8 @@ export const createPlugin = plugin =>
 		authenticateRequest = event => {
 			const headers = {};
 
-			if (event.data.organization) {
-				headers['combase-organization'] = event.data.organization.toString();
+			if (event.organization) {
+				headers['combase-organization'] = event.organization.toString();
 			}
 
 			return headers;
@@ -44,8 +44,9 @@ export const createPlugin = plugin =>
 						throw new Error('Event was not consumed.');
 					}
 				} catch (error) { 
+					logger.error(error)
 					// TODO: Currently just throws the message to the deferred_retry recovery strategy - we should check the error and conditionally send to dead_letter immediately if applicable.
-					ackOrNack(error, this.engine.broker.config.recovery.deferred_retry);
+					ackOrNack(error, this.capn.engine.broker.config.recovery.deferred_retry);
 				}
 			}
 		};
