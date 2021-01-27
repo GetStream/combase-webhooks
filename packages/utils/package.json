@@ -8,7 +8,8 @@
 	"license": "MIT",
 	"type": "module",
 	"engines": {
-		"node": ">=15.x"
+		"node": "15.x",
+		"yarn": "1.x"
 	},
 	"dependencies": {
 		"graphql": "^15.4.0",
