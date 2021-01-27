@@ -17,25 +17,25 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@captain-hook/core@^0.3.6":
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/@captain-hook/core/-/core-0.3.6.tgz#0307c55ee729b3498b7c9a79ba45801215483efd"
-  integrity sha512-joh3gC5jndQpI0JLwqs0fqJ4My1Bu3ihNgX2BiHFCbudikquElS6WWhO5AyfyNPAQqNZBjM72iNJj/e3NKKYaw==
+"@captain-hook/core@^0.3.7":
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/@captain-hook/core/-/core-0.3.7.tgz#a666be3af70d8cd2694d3f5b7a05d735a6fa7d2e"
+  integrity sha512-dzsW4QsRYEaPEDdTrjevQqLeeRszAgoVfXNUYphHJk9R6BuCol4RfscFMKW1uK3kU84HFkVYbd4PRepUW+foDw==
 
-"@captain-hook/rascal-engine@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@captain-hook/rascal-engine/-/rascal-engine-0.1.6.tgz#62578448edf8661374f3dfcc699fd6a5d9d244f6"
-  integrity sha512-PYEggbxq2wJtGdq0oZ+9AtXqqPHNlZfOIisfeTgTz4nMhO4To2hdLZZAHStAPl7kMFxElgUNleIgTUOMeBtW9g==
+"@captain-hook/rascal-engine@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@captain-hook/rascal-engine/-/rascal-engine-0.1.8.tgz#31d602732ec8ca6c753afc128838995e1091984d"
+  integrity sha512-uVFlDbdWNy3dIvyQk0eOhSlucFy6Aqm6V9XblownNzgnI77yhLV5hEzwFjzioFHi4EFYyvVsK7GzI1FlSQfvbQ==
   dependencies:
     amqplib "^0.6.0"
     rascal "^12.0.1"
 
-"@captain-hook/source-changestreams@^0.1.11":
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/@captain-hook/source-changestreams/-/source-changestreams-0.1.11.tgz#8bbe51408b4f2d528d9c90d817c6e73ec03947d2"
-  integrity sha512-+8ZwE82kRBhWrttdXuZoKvZpckI1EdrMMSrmdBdvFuTZpDAEv++CPB3us0ixc8fwdILsLWv/K4ZEMZA2BL2sdw==
+"@captain-hook/source-changestreams@^0.1.12":
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/@captain-hook/source-changestreams/-/source-changestreams-0.1.12.tgz#8e3be46dfa88a9e010316c32d807eace079b289a"
+  integrity sha512-/ND7gbSxHRTTYvLU17iP9QKVwS+/EGcj7jgrVAN493PK49497vSP+fO5wMmPNARjBbFJMOToq1kD94lKEH68vQ==
   dependencies:
-    "@captain-hook/core" "^0.3.6"
+    "@captain-hook/core" "^0.3.7"
     changestream-iterator "^0.1.4"
 
 "@sindresorhus/is@^0.14.0":
@@ -1024,10 +1024,10 @@ graphql-tag@^2.11.0:
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.11.0.tgz#1deb53a01c46a7eb401d6cb59dec86fa1cccbffd"
   integrity sha512-VmsD5pJqWJnQZMUeRwrDhfgoyqcfwEkvtpANqcoUG8/tOLkwNgU9mzub/Mc78OJMhHjx7gfAMTxzdG43VGg3bA==
 
-graphql@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.4.0.tgz#e459dea1150da5a106486ba7276518b5295a4347"
-  integrity sha512-EB3zgGchcabbsU9cFe1j+yxdzKQKAbGUWRb13DsrsMN1yyfmmIq+2+L5MqVWcDCE4V89R5AyUOi7sMOGxdsYtA==
+graphql@^15.5.0:
+  version "15.5.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.5.0.tgz#39d19494dbe69d1ea719915b578bf920344a69d5"
+  integrity sha512-OmaM7y0kaK31NKG31q4YbD2beNYa6jBBKtMFT6gLYJljHLJr42IqJ8KX08u3Li/0ifzTU5HjmoOOrwa5BRLeDA==
 
 har-schema@^2.0.0:
   version "2.0.0"

@@ -13,8 +13,8 @@
 	},
 	"private": true,
 	"dependencies": {
-		"@captain-hook/core": "^0.3.6",
-		"@captain-hook/rascal-engine": "^0.1.6",
+		"@captain-hook/core": "^0.3.7",
+		"@captain-hook/rascal-engine": "^0.1.8",
 		"deepmerge": "^4.2.2",
 		"fs-extra": "^9.1.0",
 		"slash": "^3.0.0",
