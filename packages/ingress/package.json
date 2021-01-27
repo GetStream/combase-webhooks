@@ -14,9 +14,9 @@
 	"private": true,
 	"dependencies": {
 		"@babel/runtime": "^7.12.5",
-		"@captain-hook/core": "^0.3.6",
-		"@captain-hook/rascal-engine": "^0.1.6",
-		"@captain-hook/source-changestreams": "^0.1.11",
+		"@captain-hook/core": "^0.3.7",
+		"@captain-hook/rascal-engine": "^0.1.8",
+		"@captain-hook/source-changestreams": "^0.1.12",
 		"body-parser": "^1.19.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
@@ -24,10 +24,13 @@
 		"multer": "^1.4.2",
 		"ngrok": "^3.4.0",
 		"open": "^7.3.1",
+		"pm2": "^4.5.1",
 		"utils": "*"
 	},
 	"scripts": {
-		"start": "node --es-module-specifier-resolution=node main.js",
+		"start": "pm2-runtime start pm2.prod.js",
+		"start:dev": "pm2-runtime start pm2.dev.js",
+		"dev": "node --es-module-specifier-resolution=node main.js",
 		"expose": "node ngrok.js"
 	}
 }
