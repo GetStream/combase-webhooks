@@ -20,6 +20,7 @@
 		"@combase.app/plugin-stream-activity-feeds": "^0.0.5",
 		"@combase.app/plugin-zendesk": "^0.0.5",
 		"deepmerge": "^4.2.2",
+		"execa": "^5.0.0",
 		"fs-extra": "^9.1.0",
 		"slash": "^3.0.0",
 		"utils": "*",
