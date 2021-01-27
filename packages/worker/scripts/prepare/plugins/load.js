@@ -3,9 +3,8 @@ import path from 'path';
 import crypto from 'crypto';
 import fs from 'fs';
 import { v4 as uuid } from 'uuid';
-import { createRequire } from 'module';
 
-const require = createRequire(import.meta.url);
+const pluginRequire = createPluginRequire(import.meta.url);
 
 const hashPkg = obj => {
 	const alg = 'sha256';
@@ -16,8 +15,9 @@ const hashPkg = obj => {
 };
 
 const resolvePlugin = pluginName => {
-	const pathToPluginDir = slash(path.dirname(require.resolve(path.isAbsolute(pluginName) ? pluginName : `${pluginName}/package.json`)));
+	const pathToPluginDir = slash(path.dirname(pluginRequire.resolve(path.isAbsolute(pluginName) ? pluginName : `${pluginName}/package.json`)));
 
+	 
 	// eslint-disable-next-line no-sync
 	const packageJSON = JSON.parse(fs.readFileSync(`${pathToPluginDir}/package.json`, `utf-8`));
 	// eslint-disable-next-line no-sync
