@@ -13,10 +13,11 @@
 	},
 	"private": true,
 	"dependencies": {
-		"@captain-hook/core": "^0.3.6",
-		"@captain-hook/rascal-engine": "^0.1.6",
+		"@captain-hook/core": "^0.3.7",
+		"@captain-hook/rascal-engine": "^0.1.8",
 		"deepmerge": "^4.2.2",
 		"fs-extra": "^9.1.0",
+		"pm2": "^4.5.1",
 		"slash": "^3.0.0",
 		"utils": "*",
 		"uuid": "^8.3.2"
@@ -27,6 +28,8 @@
 		"docker:run": "docker-compose up -d --scale app=10",
 		"prep": "node --es-module-specifier-resolution=node ./scripts/prepare",
 		"prestart": "yarn prep",
-		"start": "node --es-module-specifier-resolution=node ./src/main.js"
+		"start": "pm2-runtime start pm2.prod.js",
+		"start:dev": "pm2-runtime start pm2.dev.js",
+		"dev": "node --trace-warnings --es-module-specifier-resolution=node ./src/main.js"
 	}
 }

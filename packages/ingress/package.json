@@ -30,7 +30,7 @@
 	"scripts": {
 		"start": "pm2-runtime start pm2.prod.js",
 		"start:dev": "pm2-runtime start pm2.dev.js",
-		"dev": "node --es-module-specifier-resolution=node main.js",
+		"dev": "node --trace-warnings --es-module-specifier-resolution=node main.js",
 		"expose": "node ngrok.js"
 	}
 }
