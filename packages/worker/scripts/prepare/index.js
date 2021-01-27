@@ -4,13 +4,14 @@ import fs from 'fs-extra';
 
 import config from '../../combase.config.json';
 
-import { loadPlugins } from './plugins';
-// const installPlugins = require('./installPlugins');
+import { installPlugins, loadPlugins } from './plugins';
 
 try {
 	const dataDir = path.join(process.cwd(), '.data');
 
 	await fs.ensureDir(slash(dataDir));
+	
+	await installPlugins();
 
 	const plugins = await loadPlugins(config);
 

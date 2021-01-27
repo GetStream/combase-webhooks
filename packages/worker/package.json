@@ -15,6 +15,10 @@
 	"dependencies": {
 		"@captain-hook/core": "^0.3.7",
 		"@captain-hook/rascal-engine": "^0.1.8",
+		"@combase.app/plugin-autorouting": "^0.0.5",
+		"@combase.app/plugin-sendgrid": "^0.0.5",
+		"@combase.app/plugin-stream-activity-feeds": "^0.0.5",
+		"@combase.app/plugin-zendesk": "^0.0.5",
 		"deepmerge": "^4.2.2",
 		"fs-extra": "^9.1.0",
 		"slash": "^3.0.0",
