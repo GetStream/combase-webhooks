@@ -2,6 +2,7 @@
 	"plugins": [
 		"@combase.app/plugin-sendgrid",
 		"@combase.app/plugin-autorouting",
+		"@combase.app/plugin-stream-activity-feeds",
 		"@combase.app/plugin-zendesk"
 	]
 }

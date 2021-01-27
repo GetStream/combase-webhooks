@@ -43,14 +43,11 @@ export const createPlugin = plugins =>
 						await Promise.all(this[event.trigger].map(fn => fn(event, this.actions(event))));
 						ackOrNack();
 					} else {
-						const canRetry = typeof this[event.trigger] !== 'undefined';
-						const message = canRetry ? 'Something went wrong.' : `No plugins listening for ${event.trigger}`;
-						throw new Object({ canRetry, message });
+						throw new Error(`${event.trigger} • event was not consumed`)
 					}
 				} catch (error) { 
-					console.log(`${event.trigger} • ${error.message}`)
-					if (error?.canRetry) {
-						// TODO: Currently just throws the message to the deferred_retry recovery strategy - we should check the error and conditionally send to dead_letter immediately if applicable.
+					const canRetry = typeof this[event.trigger] !== 'undefined';
+					if (canRetry) {
 						ackOrNack(error, this.capn.engine.broker.config.recovery.deferred_retry);
 					} else {
 						ackOrNack(error, this.capn.engine.broker.config.recovery.dead_letter);
