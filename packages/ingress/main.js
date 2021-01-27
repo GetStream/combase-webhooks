@@ -5,7 +5,7 @@ import { logger } from "utils";
 
 import { capn } from "./capn";
 
-const { port = 8080 } = process.env;
+const { PORT = 8081 } = process.env;
 
 const app = express();
 
@@ -14,6 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer().any());
 app.use("/webhook", capn.use);
 
-await app.listen(port);
+await app.listen(PORT);
 
-logger.info(`🚀 //:${port} • Combase Webhook Ingress 💬`);
+logger.info(`🚀 //:${PORT} • Combase Webhook Ingress 💬`);
