@@ -17,6 +17,7 @@
 	"scripts": {
 		"start:ingress": "yarn workspace ingress start",
 		"dev:ingress": "concurrently \"yarn start:ingress\" \"yarn workspace ingress expose\"",
+		"prestart:worker": "yarn workspace worker prep",
 		"start:worker": "yarn workspace worker start",
 		"docker:build": "docker-compose build",
 		"docker:run": "docker-compose up -d"
