@@ -11,7 +11,8 @@
 		]
 	},
 	"engines": {
-		"node": ">=15.x"
+		"node": "15.x",
+		"yarn": "1.x"
 	},
 	"scripts": {
 		"start:ingress": "yarn workspace ingress start",
