@@ -16,4 +16,4 @@ app.use("/webhook", capn.use);
 
 await app.listen(port);
 
-logger.info(`🚀 //:${port}${apollo.graphqlPath} • Combase Webhook Ingress 💬`);
+logger.info(`🚀 //:${port} • Combase Webhook Ingress 💬`);
