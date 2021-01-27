@@ -2,7 +2,6 @@ import { logger, consumerConfig } from "utils";
 import { CaptainHook } from "@captain-hook/core";
 import { CaptainRascalEngine } from "@captain-hook/rascal-engine";
 
-import { DebugPlugin } from "./plugins";
 import { createEcosystemPlugins } from "./combase-ecosystem";
 
 const plugins = await createEcosystemPlugins();

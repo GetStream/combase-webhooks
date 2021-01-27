@@ -54,7 +54,5 @@ export const redeliveries = {
 	},
 }
 
-export const vhost = '/';
-export const connection = 'amqp://localhost:5672/';
-// export const vhost = process.env.CLOUD_AMQP_VHOST;
-// export const connection = `amqps://${vhost}:${process.env.CLOUD_AMQP_ID}.rmq.cloudamqp.com/${vhost}`;
+export const vhost = process.env.AMQP_VHOST;
+export const connection = process.env.AMQP_CONNECTION_URL;
