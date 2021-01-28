@@ -5,10 +5,6 @@ import { logger } from "utils";
 
 import { capn } from "./capn";
 
-import { dataDir } from '../utils/paths';
-
-console.log('data dir from here', dataDir)
-
 const { PORT = 8081 } = process.env;
 
 const app = express();
