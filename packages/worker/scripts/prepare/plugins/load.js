@@ -4,9 +4,10 @@ import crypto from 'crypto';
 import fs from 'fs';
 import { v4 as uuid } from 'uuid';
 import { createRequire } from 'module';
+import { logger } from 'utils';
 
 const require = createRequire(import.meta.url);
-console.log("URL", require)
+
 const hashPkg = obj => {
 	const alg = 'sha256';
 	const enc = 'hex';
@@ -54,9 +55,10 @@ export const loadPlugins = config => {
 		const plugins = config.plugins.map(pluginName => resolvePlugin(pluginName));
 		// TODO: need to perform some validation checks in resolvePlugin
 
-		// TODO: We should return undefined from resolvePlugin if the plugin is malformed or invalid etc.
 		return plugins.filter(plugin => Boolean(plugin));
 	} catch (error) {
+		logger.error(`No Plugins Installed: ${error.message}`);
+
 		return [];
 	}
 };
