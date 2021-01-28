@@ -33,7 +33,6 @@ export const createPlugin = plugins =>
 		}
 
 		listen = async () => {
-			let i = 0;
 			for await (const [event, ackOrNack] of this.capn.listen(this.triggers)) {
 				try {
 					if (typeof this[event.trigger] === 'function') {
