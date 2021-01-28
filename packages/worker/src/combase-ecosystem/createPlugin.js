@@ -1,5 +1,6 @@
-import { graphql, logger } from 'utils';
+import { emailTransport, graphql, logger } from 'utils';
 import gql from 'graphql-tag';
+
 
 export const createPlugin = plugins =>
 	class CombaseEcosystemPlugin {
@@ -29,6 +30,7 @@ export const createPlugin = plugins =>
 				gql,
 				log: logger,
 				request: (document, variables) => graphql.request(document, variables, this.authenticateRequest(event)),
+				emailTransport,
 			};
 		}
 

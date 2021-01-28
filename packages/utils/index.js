@@ -1,3 +1,4 @@
+export * from './emailTransport';
 export * from './graphql';
 export * from './logger';
 export * from './paths';
