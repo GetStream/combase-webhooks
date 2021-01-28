@@ -45,10 +45,10 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@combase.app/plugin-sendgrid@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@combase.app/plugin-sendgrid/-/plugin-sendgrid-0.0.6.tgz#b83335a502233eb64fe4d30270b6df931df2fa6a"
-  integrity sha512-gPb7rS4KY0NBf70T/eFbU+5yLv3rEUCCr/EZ2tm3ibHxosHaTYc6iaF0KFlnhN0eSYIuIvYOUlXRavc1BH0BhQ==
+"@combase.app/plugin-sendgrid@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@combase.app/plugin-sendgrid/-/plugin-sendgrid-0.0.7.tgz#320075fcf2296121e2542cfc4f6e943c5f9cdcc7"
+  integrity sha512-7I8XdvriXv0m9sJ8IoJ3lfF2DebeKDruFHiQRZOD5SwEdKzEveiP+/NCb4XS/pzKtStjlTEj4CdP/bDUEEU7hQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@sendgrid/inbound-mail-parser" "^7.4.2"
