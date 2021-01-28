@@ -17,7 +17,6 @@
 	"scripts": {
 		"start:ingress": "yarn workspace ingress start",
 		"dev:ingress": "concurrently \"yarn start:ingress\" \"yarn workspace ingress expose\"",
-		"heroku-postbuild": "yarn workspace worker prep",
 		"start:worker": "yarn workspace worker start",
 		"docker:build": "docker-compose build",
 		"docker:run": "docker-compose up -d"
@@ -27,6 +26,10 @@
 		"@captain-hook/core": "^0.3.7",
 		"@captain-hook/rascal-engine": "^0.1.8",
 		"@captain-hook/source-changestreams": "^0.1.12",
+		"@combase.app/plugin-autorouting": "^0.0.6",
+		"@combase.app/plugin-sendgrid": "^0.0.6",
+		"@combase.app/plugin-stream-activity-feeds": "^0.0.6",
+		"@combase.app/plugin-zendesk": "^0.0.6",
 		"concurrently": "^5.3.0",
 		"dotenv": "^8.2.0",
 		"execa": "^5.0.0",

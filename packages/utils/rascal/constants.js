@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import eventTypes from '../eventTypes.json';
 
 export const allGroups = Object.keys(eventTypes);

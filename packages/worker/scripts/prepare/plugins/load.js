@@ -17,7 +17,7 @@ const hashPkg = obj => {
 };
 
 const resolvePlugin = pluginName => {
-	const pathToPluginDir = slash(path.dirname(require.resolve(pluginName)));
+	const pathToPluginDir = slash(path.dirname(require.resolve(path.isAbsolute(pluginName) ? pluginName : `${pluginName}/package.json`)));
 
 	// eslint-disable-next-line no-sync
 	const packageJSON = JSON.parse(fs.readFileSync(`${pathToPluginDir}/package.json`, `utf-8`));

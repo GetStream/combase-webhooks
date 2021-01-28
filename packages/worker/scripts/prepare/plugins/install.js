@@ -10,7 +10,7 @@ if (plugins.length === 0 || !plugins || !Array.isArray(plugins)) {
 }
 
 export const installPlugins = async () => {
-	const subprocess = execa('yarn', ['add', ...plugins, '--no-save']);
+	const subprocess = execa('yarn', ['add', ...plugins]);
 
 	try {
 		subprocess.stdout.pipe(process.stdout);
