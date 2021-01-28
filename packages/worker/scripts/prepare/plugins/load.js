@@ -58,7 +58,6 @@ export const loadPlugins = config => {
 		return plugins.filter(plugin => Boolean(plugin));
 	} catch (error) {
 		logger.error(`No Plugins Installed: ${error.message}`);
-
-		return [];
+		process.exit(1);
 	}
 };
