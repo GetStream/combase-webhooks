@@ -1,7 +1,7 @@
 import slash from 'slash';
 import path from 'path';
 import fs from 'fs-extra';
-import { dataDir } from 'utils/paths';
+import { dataDir } from 'utils';
 
 import config from '../../combase.config.json';
 
