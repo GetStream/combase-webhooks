@@ -7,7 +7,7 @@ import { createChangeStreamSource } from '@captain-hook/source-changestreams';
 import { mongo } from './mongo';
 
 const router = new Router();
-const engine =  await CaptainRascalEngine.create(publisherConfig, false);
+const engine =  await CaptainRascalEngine.create(publisherConfig, true);
 
 export const capn = new CaptainHook({
     engine,

@@ -7,7 +7,7 @@ import { createEcosystemPlugins } from "./combase-ecosystem";
 const plugins = await createEcosystemPlugins();
 
 const capn = new CaptainHook({
-	engine: await CaptainRascalEngine.create(consumerConfig),
+	engine: await CaptainRascalEngine.create(consumerConfig, true),
 	logger,
 	plugins,
 });
