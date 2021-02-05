@@ -17,7 +17,7 @@
 	"scripts": {
 		"clean": "rm -rf dist",
 		"prep": "node --es-module-specifier-resolution=node ./scripts/prepare",
-		"heroku-postbuild": "yarn prep",
+		"prestart:ingress": "yarn prep",
 		"start:ingress": "yarn workspace ingress start",
 		"dev:ingress": "concurrently \"yarn start:ingress\" \"yarn workspace ingress expose\"",
 		"start:worker": "yarn workspace worker start",
