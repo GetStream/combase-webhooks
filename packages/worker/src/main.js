@@ -1,10 +1,14 @@
-import { logger, consumerConfig, manifest } from "utils";
+import fs from 'fs';
+import path from 'path';
 import { CaptainHook } from "@captain-hook/core";
 import { CaptainRascalEngine } from "@captain-hook/rascal-engine";
+import { logger, consumerConfig, createPath } from "utils";
 
 import { createEcosystemPlugins } from "./combase-ecosystem";
 
-const plugins = await createEcosystemPlugins(manifest);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const plugins = await createEcosystemPlugins(fs.readFileSync(createPath(__dirname, '../../../', '.data', 'integration-manifest.json')));
 
 const capn = new CaptainHook({
 	engine: await CaptainRascalEngine.create(consumerConfig, true),

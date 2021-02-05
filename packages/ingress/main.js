@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import multer from "multer";
 import fs from 'fs';
 import path from 'path';
-import slash from 'slash';
 import { fileURLToPath } from 'url';
 import { logger } from "utils";
 
