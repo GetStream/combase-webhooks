@@ -4,7 +4,7 @@ import multer from "multer";
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { logger } from "utils";
+import { createPath, logger } from "utils";
 
 import { capn } from "./capn";
 
@@ -20,7 +20,7 @@ app.use(multer().any());
 app.use("/webhook", capn.use);
 
 app.get('/integration-definitions', (req, res) => {
-	const integrations = fs.readFileSync(createPath(__dirname, '../../', '.data', 'integration-manifest.json'));
+	const integrations = fs.readFileSync(createPath([__dirname, '../../', '.data', 'integration-manifest.json']));
 	
 	return res.send(JSON.parse(integrations)).end();
 });

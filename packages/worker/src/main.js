@@ -8,7 +8,7 @@ import { createEcosystemPlugins } from "./combase-ecosystem";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const plugins = await createEcosystemPlugins(fs.readFileSync(createPath(__dirname, '../../../', '.data', 'integration-manifest.json')));
+const plugins = await createEcosystemPlugins(fs.readFileSync(createPath([__dirname, '../../../', '.data', 'integration-manifest.json'])));
 
 const capn = new CaptainHook({
 	engine: await CaptainRascalEngine.create(consumerConfig, true),
