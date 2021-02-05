@@ -12,6 +12,10 @@
 		"yarn": "1.x"
 	},
 	"dependencies": {
+		"@combase.app/plugin-autorouting": "^0.0.6",
+		"@combase.app/plugin-sendgrid": "^0.0.8",
+		"@combase.app/plugin-stream-activity-feeds": "^0.0.6",
+		"@combase.app/plugin-zendesk": "^0.0.6",
 		"graphql": "^15.5.0",
 		"graphql-request": "^3.4.0",
 		"graphql-tag": "^2.11.0",
