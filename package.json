@@ -15,7 +15,7 @@
 		"yarn": "1.x"
 	},
 	"scripts": {
-		"clean": "rm -rf .data",
+		"clean": "rm -rf dist",
 		"prep": "node --es-module-specifier-resolution=node ./scripts/prepare",
 		"heroku-postbuild": "yarn prep",
 		"start:ingress": "yarn workspace ingress start",

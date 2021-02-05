@@ -10,7 +10,7 @@ yarn-error.log*
 .jest-coverage
 
 # Plugins
-.data
+dist
 
 # Runtime data
 pids
