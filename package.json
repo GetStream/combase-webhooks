@@ -15,7 +15,7 @@
 		"yarn": "1.x"
 	},
 	"scripts": {
-		"clean": "rm -rf .data",
+		"clean": "rm -rf dist",
 		"prep": "node --es-module-specifier-resolution=node ./scripts/prepare",
 		"prestart:ingress": "yarn prep",
 		"start:ingress": "yarn workspace ingress start",

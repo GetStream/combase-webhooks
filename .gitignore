@@ -12,7 +12,7 @@ node_modules
 .jest-coverage
 
 # Plugins
-.data
+dist
 
 # Runtime data
 pids
@@ -67,7 +67,7 @@ typings/
 .env
 
 # builds
-.data/
+dist/
 lib/
 
 # system
