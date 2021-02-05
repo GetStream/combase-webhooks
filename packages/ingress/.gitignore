@@ -10,7 +10,7 @@ yarn-error.log*
 .jest-coverage
 
 # Plugins
-dist
+.data
 
 # Runtime data
 pids
@@ -65,7 +65,7 @@ typings/
 .env
 
 # builds
-dist/
+.data/
 lib/
 
 # system

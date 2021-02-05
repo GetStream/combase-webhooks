@@ -21,7 +21,7 @@ app.use(multer().any());
 app.use("/webhook", capn.use);
 
 app.get('/integration-definitions', (req, res) => {
-	const integrations = fs.readFileSync(slash(path.join(__dirname, '../', '../', 'dist', 'integration-manifest.json')));
+	const integrations = fs.readFileSync(createPath(__dirname, '../../', '.data', 'integration-manifest.json'));
 	
 	return res.send(JSON.parse(integrations)).end();
 });

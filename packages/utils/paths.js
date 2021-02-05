@@ -1,12 +1,7 @@
 import path from 'path';
 import slash from 'slash';
 
-const createPath = parts => slash(path.join(...parts));
+export const createPath = parts => slash(path.join(...parts));
 
-const dataDir = createPath([process.cwd(), 'dist']);
-const manifest = createPath([process.cwd(), 'dist', 'integration-manifest.json']);
-
-export {
-	dataDir,
-	manifest,
-}
+export const dataDir = createPath([process.cwd(), '.data']);
+export const manifest = createPath([process.cwd(), '.data', 'integration-manifest.json']);
