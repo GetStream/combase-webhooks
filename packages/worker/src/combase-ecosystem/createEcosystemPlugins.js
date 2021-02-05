@@ -1,14 +1,8 @@
-import path from 'path';
-import slash from 'slash';
-import fs from 'fs-extra';
-import { dataDir } from 'utils/paths';
-
 import { createPlugin } from './createPlugin';
 
-export const createEcosystemPlugins = async () => {
-	// eslint-disable-next-line no-sync
-	let pluginConfigs = JSON.parse(fs.readFileSync(slash(path.join(dataDir, 'integration-manifest.json'))));
-	
+export const createEcosystemPlugins = async (manifest) => {
+	let pluginConfigs = manifest;
+
 	pluginConfigs = await Promise.all(pluginConfigs.map(async (config) => {
 		const { internal: { path } } = config;
 		const pluginModule = await import(path);

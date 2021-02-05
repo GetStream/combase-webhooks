@@ -1,7 +1,6 @@
 import { emailTransport, graphql, logger } from 'utils';
 import gql from 'graphql-tag';
 
-
 export const createPlugin = plugins =>
 	class CombaseEcosystemPlugin {
 		constructor(capn) {
