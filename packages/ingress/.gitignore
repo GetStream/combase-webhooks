@@ -9,9 +9,6 @@ yarn-error.log*
 .jest-cache
 .jest-coverage
 
-# Plugins
-dist
-
 # Runtime data
 pids
 *.pid

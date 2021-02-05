@@ -12,7 +12,7 @@ node_modules
 .jest-coverage
 
 # Plugins
-dist
+.data/
 
 # Runtime data
 pids
