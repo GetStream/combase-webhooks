@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { CaptainHook } from "@captain-hook/core";
 import { CaptainRascalEngine } from "@captain-hook/rascal-engine";
 import { logger, consumerConfig, createPath } from "utils";
