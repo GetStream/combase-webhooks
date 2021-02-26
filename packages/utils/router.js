@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { triggers  } from './rascal/constants';
 import { mongoOperationToTrigger } from './mongoOperationToTrigger';
 import { combaseWebhookParser } from './combaseWebhookParser';
 
@@ -13,44 +14,58 @@ import { combaseWebhookParser } from './combaseWebhookParser';
  * ! The router is only used on the ingress.
  */
 export class Router {
-    validateTrigger = () => true;
+    validateTrigger = (trigger) => {
+		if (!trigger) {
+            // eslint-disable-next-line no-console
+            throw new Error(`No event trigger found.`);
+        }
+
+        if (trigger && !triggers.includes(trigger)) {
+            // eslint-disable-next-line no-console
+            throw new Error(`Generated trigger ${trigger} was not recognized as valid by any Combase event publication.`);
+        }
+
+		return trigger;
+	};
 
     createEventFromChangeStream = ({ _id: _, clusterTime: __, operationType, ns: { coll: collectionName }, documentKey: { _id }, ...rest }) => {
-        const trigger = mongoOperationToTrigger(collectionName, operationType, rest);
+		try {
+			const trigger = mongoOperationToTrigger(collectionName, operationType, rest);
+			
+			this.validateTrigger(trigger);
 
-        if (!trigger) {
-            // eslint-disable-next-line no-console
-            console.error(`Couldn't discern the correct event trigger from the ${operationType} event on the ${collectionName} collection.`);
+			return {
+				data: {
+					body: rest,
+					_id,
+				},
+				organization: rest.fullDocument?.organization?.toString?.(),
+				trigger,
+			};
 
-            return;
-        }
-
-        if (trigger && !this.validateTrigger(trigger)) {
-            // eslint-disable-next-line no-console
-            console.error(`Generated trigger ${trigger} was not recognized as a valid Combase event trigger`);
-        }
-
-        return {
-            data: {
-                body: rest,
-                _id,
-			},
-			organization: rest.fullDocument?.organization?.toString?.(),
-            trigger,
-        };
+		} catch (error) {
+			return null;
+		}
     };
 
     createEventFromWebhook = async data => {
-		const eventMeta = await combaseWebhookParser(data);
-		return {
-			data: {
-				body: data.body,
-				query: data.query,
-				headers: data.headers,
-				source: data.source,
-				originHost: data.get('origin') || data.get('host'),
-			},
-			...eventMeta,
+		try {
+			const eventMeta = await combaseWebhookParser(data);
+			
+			this.validateTrigger(trigger)
+			
+			return {
+				data: {
+					body: data.body,
+					query: data.query,
+					headers: data.headers,
+					source: data.source,
+					originHost: data.get('origin') || data.get('host'),
+				},
+				...eventMeta,
+			}
+		} catch (error) {
+			return null;
 		}
 	};
 

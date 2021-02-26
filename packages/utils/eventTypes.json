@@ -1,6 +1,9 @@
 {
 	"agent": ["created", "deleted", "updated"],
 	"asset": ["created", "deleted", "updated"],
+	"chat": {
+		"channel": ["created"]
+	},
 	"email": ["receive"],
 	"faq": ["created", "deleted", "updated"],
 	"group": ["created", "deleted", "updated"],
@@ -8,7 +11,7 @@
 	"note": ["created", "deleted", "updated"],
 	"organization": ["created", "deleted", "updated"],
 	"tag": ["created", "deleted", "updated"],
-	"ticket": ["created", "deleted", "updated", "archived", "labelled", "assigned", "tagged"],
+	"ticket": ["created", "deleted", "updated", "archived", "labelled", "assigned", "tagged", "unassigned"],
 	"user": ["created", "deleted", "updated"],
 	"webhook": ["created", "deleted", "updated"],
 	"zendesk": ["sync"]

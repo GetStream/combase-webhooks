@@ -2,7 +2,14 @@ import 'dotenv/config';
 import eventTypes from '../eventTypes.json';
 
 export const allGroups = Object.keys(eventTypes);
-export const triggers = allGroups.flatMap((group) => eventTypes[group].map(op => `${group}.${op}`));
+export const triggers = allGroups.flatMap((group) => {
+	const triggerGroup = eventTypes[group];
+	if (Array.isArray(triggerGroup)) {
+		return eventTypes[group].map(op => `${group}.${op}`)
+	} else {
+		return Object.keys(eventTypes[group]).flatMap((subgroup) => eventTypes[group][subgroup].map(op => `${group}:${subgroup}.${op}`))
+	}
+});
 
 export const exchanges = {
 	'events': { // events exchange
@@ -57,3 +64,4 @@ export const redeliveries = {
 
 export const vhost = process.env.AMQP_VHOST;
 export const connection = process.env.AMQP_CONNECTION_URL;
+

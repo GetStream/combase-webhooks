@@ -1,11 +1,14 @@
 import gql from 'graphql-tag';
 import { graphql } from './graphql';
-
+// TODO: Ticket created is being caught rn from changestreams and used for routing - this should com from the chat webhooks - we need to catch them below and create event from stream chat webhooks
 export const combaseWebhookParser = async ({ headers, body, query }) => {
 	let organization;
 	let trigger;
 
-	if (query.id || headers['content-type'].startsWith('application/x-www-form-urlencoded') && body.id) {
+	if (headers['target-agent'] === 'Stream Webhook Client') {
+		trigger = `chat:${body.type}`;
+		organization  = body.channel.organization;
+	} else if (query.id || headers['content-type'].startsWith('application/x-www-form-urlencoded') && body.id) {
 		const id = query.id || body.id;
 		// fetch integration from mongo with the integration id.
 		// can get the org id from here.
@@ -37,7 +40,7 @@ export const combaseWebhookParser = async ({ headers, body, query }) => {
 	}
 
 	return {
-		organization,
+		organization: organization || query.organization,
 		trigger: trigger || query.trigger,
 	}
 };

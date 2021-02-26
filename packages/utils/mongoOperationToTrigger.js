@@ -15,6 +15,10 @@ export const mongoOperationToTrigger = (collectionName, operationType, { updateD
 					triggerOperation = 'assigned';
 					break;
 				}
+				if (updateDescription?.updatedFields?.status === 'unassigned') {
+					triggerOperation = 'unassigned';
+					break;
+				}
 			}
 
             triggerOperation = 'updated';

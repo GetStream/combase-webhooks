@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import { createPath, logger } from "utils";
 
 import { capn } from "./capn";
+import { commands } from "./commands";
 
 const { PORT = 8081 } = process.env;
 
@@ -17,7 +18,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer().any());
-app.use("/webhook", capn.use);
+app.use('/webhook', capn.use);
+
+app.use('/chat-commands', commands.middleware);
 
 app.get('/integration-definitions', (req, res) => {
 	const integrations = fs.readFileSync(createPath([__dirname, '../../', '.data', 'integration-manifest.json']));
