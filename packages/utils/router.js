@@ -31,7 +31,6 @@ export class Router {
     createEventFromChangeStream = ({ _id: _, clusterTime: __, operationType, ns: { coll: collectionName }, documentKey: { _id }, ...rest }) => {
 		try {
 			const trigger = mongoOperationToTrigger(collectionName, operationType, rest);
-			
 			this.validateTrigger(trigger);
 
 			return {
@@ -51,7 +50,6 @@ export class Router {
     createEventFromWebhook = async data => {
 		try {
 			const eventMeta = await combaseWebhookParser(data);
-
 			this.validateTrigger(eventMeta?.trigger)
 			
 			return {
@@ -83,7 +81,6 @@ export class Router {
 
                 break;
         }
-		console.log('FIRING:', payload)
 
         /**
          * Router must return either a single event object,

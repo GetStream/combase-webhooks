@@ -66,10 +66,10 @@
     "@captain-hook/core" "^0.3.7"
     changestream-iterator "^0.1.4"
 
-"@combase.app/plugin-autorouting@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@combase.app/plugin-autorouting/-/plugin-autorouting-0.0.7.tgz#b738e4f0f97094d9ec48cea8d121b0c6f01c6b11"
-  integrity sha512-mtLBf+1b495LVvKyFWr6mOjgTjgxKP8uXCIWOat5mAkuoGaqnPjUeDRFHNNOtgp/PhQmHFLOZn5MM5zcjSLXsw==
+"@combase.app/plugin-autorouting@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@combase.app/plugin-autorouting/-/plugin-autorouting-0.0.8.tgz#109d16076a6a5633b5cf4ea5a19445f61172be7f"
+  integrity sha512-/ODFE1bg1krcr+vtALF3ysqUShgApq9gH5NX5RDdjoVO66u8KZZp9B9M5M8YELpC2e+6RjPlJumHM2PJUwW7gg==
   dependencies:
     "@babel/runtime" "^7.12.5"
 
@@ -83,10 +83,10 @@
     nodemailer "^6.4.17"
     nodemailer-sendgrid-transport "^0.2.0"
 
-"@combase.app/plugin-stream-activity-feeds@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@combase.app/plugin-stream-activity-feeds/-/plugin-stream-activity-feeds-0.0.7.tgz#098fbf4b46d9853d88dec2b7b4c9d1a653e68dac"
-  integrity sha512-TexCzfggSH+ionIDThuzT+DTMNoATHiSYH0D8HNgawjqhEkYn154edSBfaiaHNyN94mKdT54byu5prjprtIu9w==
+"@combase.app/plugin-stream-activity-feeds@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@combase.app/plugin-stream-activity-feeds/-/plugin-stream-activity-feeds-0.0.8.tgz#42da9c698aa2d575c96afc0ad504628609b4e5fd"
+  integrity sha512-h1QRmkV/rqIsIG1D0wHLASvoU8lT+Nq12aP/tk1QR7RRLQAns9ijJuMKk+DqBXcWvinNz5J7BU+zauEq8nvTUQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
 
