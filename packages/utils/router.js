@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { triggers  } from './rascal/constants';
 import { mongoOperationToTrigger } from './mongoOperationToTrigger';
 import { combaseWebhookParser } from './combaseWebhookParser';
+import { logger } from './logger';
 
 /** 
  * For Combase, all events must contain data.organization with the org id for the request 
@@ -50,6 +51,7 @@ export class Router {
     createEventFromWebhook = async data => {
 		try {
 			const eventMeta = await combaseWebhookParser(data);
+
 			this.validateTrigger(eventMeta?.trigger)
 			
 			return {

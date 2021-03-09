@@ -42,6 +42,7 @@ const resolvePlugin = pluginName => {
 
 	return {
 		...configJSON,
+		// icon,
 		internal: {
 			...internal,
 			hash: hashPkg(packageJSON),
