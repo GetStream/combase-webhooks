@@ -13,17 +13,17 @@
 	},
 	"private": true,
 	"dependencies": {
-		"@babel/runtime": "^7.13.8",
+		"@babel/runtime": "^7.13.10",
 		"@captain-hook/core": "^0.3.7",
 		"@captain-hook/rascal-engine": "^0.1.8",
 		"@captain-hook/source-changestreams": "^0.1.12",
 		"body-parser": "^1.19.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
-		"mongoose": "^5.11.18",
+		"mongoose": "^5.11.19",
 		"multer": "^1.4.2",
 		"ngrok": "^3.4.0",
-		"open": "^7.4.2",
+		"open": "^8.0.2",
 		"utils": "*"
 	},
 	"scripts": {

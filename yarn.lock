@@ -38,10 +38,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.13.8":
-  version "7.13.8"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.8.tgz#cc886a85c072df1de23670dc1aa59fc116c4017c"
-  integrity sha512-CwQljpw6qSayc0fRG1soxHAKs1CnQMOChm4mlQP6My0kf9upVGizj/KhlTTgyUnETmHpcUXjaluNAkteRFuafg==
+"@babel/runtime@^7.13.10":
+  version "7.13.10"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.10.tgz#47d42a57b6095f4468da440388fdbad8bebf0d7d"
+  integrity sha512-4QPkjJq6Ns3V/RgpEahRk+AGfL0eO6RHHtTWoNNr5mO49G6B5+X6d6THgWEAvTrznU5xYpbAlVKRYcsCgh/Akw==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -66,17 +66,17 @@
     "@captain-hook/core" "^0.3.7"
     changestream-iterator "^0.1.4"
 
-"@combase.app/plugin-autorouting@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@combase.app/plugin-autorouting/-/plugin-autorouting-0.0.8.tgz#109d16076a6a5633b5cf4ea5a19445f61172be7f"
-  integrity sha512-/ODFE1bg1krcr+vtALF3ysqUShgApq9gH5NX5RDdjoVO66u8KZZp9B9M5M8YELpC2e+6RjPlJumHM2PJUwW7gg==
+"@combase.app/plugin-autorouting@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@combase.app/plugin-autorouting/-/plugin-autorouting-0.0.9.tgz#78d470c48f0a6aa59f0a17271006e6bc73b2c166"
+  integrity sha512-pwen2kp3qJeEYrg6YaW8kZc2fWLHd7jFOGm9ZNnMNA9Mv0+rQKzKdc/Xmta1+bklOfH0dNuyzyDViaNIT+gMZw==
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@combase.app/plugin-sendgrid@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@combase.app/plugin-sendgrid/-/plugin-sendgrid-0.0.9.tgz#a0bbd69859272b7cf4dc445dac0bf96be28a7824"
-  integrity sha512-gZFNfXZtWuP48n7B0aEsrbJlfOols189oXOcstVTLibtwSW2j06uLcow1DrG0JRDobfgWONdh1eKiUyeljRang==
+"@combase.app/plugin-sendgrid@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@combase.app/plugin-sendgrid/-/plugin-sendgrid-0.0.11.tgz#b05c5d36bcab2fac36cef21f109b826023b031d4"
+  integrity sha512-VveEWNiQZd9Xu6IaKA40VlQ7clc6h2/AhUlrEgpP9HFCU4BM2rQFG93WY0XvGZYfcJrjFhHeuZneyAWKv6AA0Q==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@sendgrid/inbound-mail-parser" "^7.4.2"
@@ -90,10 +90,10 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@combase.app/plugin-zendesk@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@combase.app/plugin-zendesk/-/plugin-zendesk-0.0.6.tgz#39d595d0697b5789924eaf3e8b6c70aeb000e98a"
-  integrity sha512-ntKKsggXL7uGJjaxP1sv03nh81HzAYGVAf7ikT8s9G/buCz9nid5yjnqLGX9NpFcnd5TUW7l5oZ87SRCBhahcQ==
+"@combase.app/plugin-zendesk@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@combase.app/plugin-zendesk/-/plugin-zendesk-0.0.7.tgz#0033c51076fbaf6cbc87b00f56150431149649ce"
+  integrity sha512-xrdMLk1ue8UCLOYGhHCJ/JReFKbeinDRAqWmgbkaOC2nae6tXCGAtBbxhvVLEomKMIoapVKX+cX6S8DRN5lDXg==
   dependencies:
     "@babel/runtime" "^7.12.5"
 
@@ -950,6 +950,11 @@ defer-to-connect@^1.0.1:
   resolved "https://registry.yarnpkg.com/defer-to-connect/-/defer-to-connect-1.1.3.tgz#331ae050c08dcf789f8c83a7b81f0ed94f4ac591"
   integrity sha512-0ISdNousHvZT2EiFlZeZAHBUvSxmKswVCEf8hW7KWgG4a8MVEu/3Vb6uWYozkjylyCxe0JBIiRB1jV45S70WVQ==
 
+define-lazy-prop@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/define-lazy-prop/-/define-lazy-prop-2.0.0.tgz#3f7ae421129bcaaac9bc74905c98a0009ec9ee7f"
+  integrity sha512-Ds09qNh8yw3khSjiJjiUInaGX9xlqZDY7JVryGxdxV7NPeuqQfplOpQ66yJFZut3jLa5zOwkXw1g9EI2uKh4Og==
+
 delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
@@ -1730,7 +1735,7 @@ is-core-module@^2.1.0:
   dependencies:
     has "^1.0.3"
 
-is-docker@^2.0.0:
+is-docker@^2.0.0, is-docker@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/is-docker/-/is-docker-2.1.1.tgz#4125a88e44e450d384e09047ede71adc2d144156"
   integrity sha512-ZOoqiXfEwtGknTiuDEy8pN2CfE3TxMHprvNer1mXiqwkOT77Rw3YVrUQ52EqAOU3QAWDQ+bQdx7HJzrv7LS2Hw==
@@ -1800,7 +1805,7 @@ is-typedarray@^1.0.0, is-typedarray@~1.0.0:
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
   integrity sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
 
-is-wsl@^2.1.1:
+is-wsl@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-2.2.0.tgz#74a4c76e77ca9fd3f932f290c17ea326cd157271"
   integrity sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==
@@ -2184,10 +2189,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.11.18:
-  version "5.11.18"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.18.tgz#76fdcefeb2afc7409705fc44b58045953bba5ee1"
-  integrity sha512-RsrPR9nhkXZbO3ml0DcmdbfeMvFNhgFrP81S6o1P+lFnDTNEKYnGNRCIL+ojD69wj7H5jJaAdZ0SJ5IlKxCHqw==
+mongoose@^5.11.19:
+  version "5.11.19"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.19.tgz#fb20ee6145f4ca9bd757f87ed3ae9e13e92effde"
+  integrity sha512-+oMf4XVg+j7ygnALi7K5vWZfKvC9gs9jdN/6Y1GV5OUAc7KQWoa6hzFO7nSj5jMJlhHNvC6tcS2uU7BV5aH8Lg==
   dependencies:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
@@ -2396,13 +2401,14 @@ onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
-open@^7.4.2:
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/open/-/open-7.4.2.tgz#b8147e26dcf3e426316c730089fd71edd29c2321"
-  integrity sha512-MVHddDVweXZF3awtlAS+6pgKLlm/JgxZ90+/NBurBoQctVOOB/zDdVjcyPzQ+0laDGbsWgrRkflI65sQeOgT9Q==
+open@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/open/-/open-8.0.2.tgz#8c3e95cce93ba2fc8d99968ee8bfefecdb50b84f"
+  integrity sha512-NV5QmWJrTaNBLHABJyrb+nd5dXI5zfea/suWawBhkHzAbVhLLiJdrqMgxMypGK9Eznp2Ltoh7SAVkQ3XAucX7Q==
   dependencies:
-    is-docker "^2.0.0"
-    is-wsl "^2.1.1"
+    define-lazy-prop "^2.0.0"
+    is-docker "^2.1.1"
+    is-wsl "^2.2.0"
 
 optionator@^0.8.1:
   version "0.8.3"
