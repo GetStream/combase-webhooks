@@ -8,7 +8,6 @@ export const createPlugin = plugins =>
 			this.triggers = Object.keys(plugins);
 
 			Object.entries(plugins).forEach(([trigger, method]) => {
-				console.log(trigger, method);
 					this[trigger] = method;
 				});
 
@@ -37,7 +36,7 @@ export const createPlugin = plugins =>
 		listen = async () => {
 			for await (const [event, ackOrNack] of this.capn.listen(this.triggers)) {
 				try {
-					console.log(event.trigger, this[event.trigger]);
+
 					if (typeof this[event.trigger] === 'function') {
 						await this[event.trigger](event, this.actions(event));
 						ackOrNack();

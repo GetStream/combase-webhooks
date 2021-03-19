@@ -39,7 +39,7 @@ export const combaseWebhookParser = async ({ headers, body, query }) => {
 		organization = body.to.split('@')[0];
 		trigger = 'email.receive';
 	}
-	console.log(organization, trigger);
+
 	return {
 		organization: organization || query.organization,
 		trigger: trigger || query.trigger,
