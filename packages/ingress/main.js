@@ -14,7 +14,6 @@ const { PORT = 8081 } = process.env;
 const app = express();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer().any());

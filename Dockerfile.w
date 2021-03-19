@@ -1,17 +1,14 @@
-FROM node:15.2.0
+FROM node:15.12.0-alpine3.10
 
 # Create app directory
 WORKDIR /usr/src/app
 
-COPY packages/worker packages/worker
-COPY packages/utils packages/utils
+COPY . .
 
 # Install app dependencies
 COPY package.json .
 COPY yarn.lock .
 
 RUN yarn
-
-EXPOSE 8080
 
 CMD [ "yarn", "start:worker" ]
