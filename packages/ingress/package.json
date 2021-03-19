@@ -27,7 +27,7 @@
 		"utils": "*"
 	},
 	"scripts": {
-		"dev": "nodemon -x 'node --es-module-specifier-resolution=node main.js' -w '../utils ./'",
+		"dev": "nodemon -x 'node --es-module-specifier-resolution=node main.js' -w '../utils/**/*.js ./**/*.js'",
 		"start": "node --es-module-specifier-resolution=node main.js",
 		"expose": "node ngrok.js"
 	}
