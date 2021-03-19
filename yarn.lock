@@ -73,10 +73,10 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@combase.app/plugin-sendgrid@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@combase.app/plugin-sendgrid/-/plugin-sendgrid-0.0.11.tgz#b05c5d36bcab2fac36cef21f109b826023b031d4"
-  integrity sha512-VveEWNiQZd9Xu6IaKA40VlQ7clc6h2/AhUlrEgpP9HFCU4BM2rQFG93WY0XvGZYfcJrjFhHeuZneyAWKv6AA0Q==
+"@combase.app/plugin-sendgrid@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@combase.app/plugin-sendgrid/-/plugin-sendgrid-0.0.12.tgz#973bbfd34b17f5cc4686b7680b323d9e19086faa"
+  integrity sha512-7z3taGHlGOZIGplw0MjkUEx7aAPEfVHSc4/oS4bmqtMSfS4ZtHRPnzWhoh+d/wgT/aNUbThvOQb1GKu11O+dBw==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@sendgrid/inbound-mail-parser" "^7.4.2"
@@ -2171,10 +2171,10 @@ mkpath@^0.1.0:
   resolved "https://registry.yarnpkg.com/mkpath/-/mkpath-0.1.0.tgz#7554a6f8d871834cc97b5462b122c4c124d6de91"
   integrity sha1-dVSm+Nhxg0zJe1RisSLEwSTW3pE=
 
-mongodb@3.6.4:
-  version "3.6.4"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.4.tgz#ca59fd65b06831308262372ef9df6b78f9da97be"
-  integrity sha512-Y+Ki9iXE9jI+n9bVtbTOOdK0B95d6wVGSucwtBkvQ+HIvVdTCfpVRp01FDC24uhC/Q2WXQ8Lpq3/zwtB5Op9Qw==
+mongodb@3.6.5:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.5.tgz#c27d786fd4d3c83dc19302483707d12a9d2aee5f"
+  integrity sha512-mQlYKw1iGbvJJejcPuyTaytq0xxlYbIoVDm2FODR+OHxyEiMR021vc32bTvamgBjCswsD54XIRwhg3yBaWqJjg==
   dependencies:
     bl "^2.2.1"
     bson "^1.1.4"
@@ -2189,15 +2189,15 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.11.19:
-  version "5.11.19"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.19.tgz#fb20ee6145f4ca9bd757f87ed3ae9e13e92effde"
-  integrity sha512-+oMf4XVg+j7ygnALi7K5vWZfKvC9gs9jdN/6Y1GV5OUAc7KQWoa6hzFO7nSj5jMJlhHNvC6tcS2uU7BV5aH8Lg==
+mongoose@^5.12.1:
+  version "5.12.1"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.12.1.tgz#9aace8ac783b239906253396a98f2a56c0964b8b"
+  integrity sha512-g/oIEvQQrK1XcICS/PfzU1Gu1s6Uw1rgJP7/SfC3Ru6pTLa1dH2Lb+iJipNWqChbrykE78j/wwBVSsbyCZRl5Q==
   dependencies:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
     kareem "2.3.2"
-    mongodb "3.6.4"
+    mongodb "3.6.5"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.8.3"
     mquery "3.2.4"
@@ -2262,10 +2262,10 @@ negotiator@0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
 
-ngrok@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/ngrok/-/ngrok-3.4.0.tgz#adaa66b70401b0b6902825aa3ea325c06f8770d1"
-  integrity sha512-fwgYlGQsLclMRVkGNhdWbeE5xx/xCoKr8zHoqRehOxGu4Ep14dAfe1u45rE0rqtUhWqTVfCl1lWV2rLUNizIDw==
+ngrok@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/ngrok/-/ngrok-3.4.1.tgz#ee20a912831e68a7ac86a6576c21fadbd8458df7"
+  integrity sha512-OTm6Nmi6JINPbzkZff8ysA2WqMeNDg3sOPMFHW2CpatVD5yJxmX1qdyLq3QYNACTKNB3/K9jTkG4wUVpAFX9Dw==
   dependencies:
     "@types/node" "^8.10.50"
     "@types/request" "^2.48.2"
@@ -2401,10 +2401,10 @@ onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
-open@^8.0.2:
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/open/-/open-8.0.2.tgz#8c3e95cce93ba2fc8d99968ee8bfefecdb50b84f"
-  integrity sha512-NV5QmWJrTaNBLHABJyrb+nd5dXI5zfea/suWawBhkHzAbVhLLiJdrqMgxMypGK9Eznp2Ltoh7SAVkQ3XAucX7Q==
+open@^8.0.3:
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/open/-/open-8.0.3.tgz#04f4406c950666c35041aad8a621700022116afd"
+  integrity sha512-7nsHNw3rOIPTwhF5iYkgE+LVM/oUHWC3cgrWNxPqa+W+Wl5Ekvo32qayB5PYX8zNjXzUkrTaJsWpaGmuw8Aspg==
   dependencies:
     define-lazy-prop "^2.0.0"
     is-docker "^2.1.1"
@@ -2494,16 +2494,16 @@ pino-std-serializers@^3.1.0:
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-3.2.0.tgz#b56487c402d882eb96cd67c257868016b61ad671"
   integrity sha512-EqX4pwDPrt3MuOAAUBMU0Tk5kR/YcCM5fNPEzgCO2zJ5HfX0vbiH9HbJglnyeQsN96Kznae6MWD47pZB5avTrg==
 
-pino@^6.11.1:
-  version "6.11.1"
-  resolved "https://registry.yarnpkg.com/pino/-/pino-6.11.1.tgz#5af2d5395cfe625ead9fe64a3b51a4802cd2598e"
-  integrity sha512-PoDR/4jCyaP1k2zhuQ4N0NuhaMtei+C9mUHBRRJQujexl/bq3JkeL2OC23ada6Np3zeUMHbO4TGzY2D/rwZX3w==
+pino@^6.11.2:
+  version "6.11.2"
+  resolved "https://registry.yarnpkg.com/pino/-/pino-6.11.2.tgz#2f3d119c526651aab4ec3d280844785d52d0b690"
+  integrity sha512-bmzxwbrIPxQUlAuMkF4PWVErUGERU4z37HazlhflKFg08crsNE3fACGN6gPwg5xtKOK47Ux5cZm8YCuLV4wWJg==
   dependencies:
     fast-redact "^3.0.0"
     fast-safe-stringify "^2.0.7"
     flatstr "^1.0.12"
     pino-std-serializers "^3.1.0"
-    quick-format-unescaped "^4.0.1"
+    quick-format-unescaped "4.0.1"
     sonic-boom "^1.0.2"
 
 prelude-ls@~1.1.2:
@@ -2584,7 +2584,7 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
   integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
 
-quick-format-unescaped@^4.0.1:
+quick-format-unescaped@4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/quick-format-unescaped/-/quick-format-unescaped-4.0.1.tgz#437a5ea1a0b61deb7605f8ab6a8fd3858dbeb701"
   integrity sha512-RyYpQ6Q5/drsJyOhrWHYMWTedvjTIat+FTwv0K4yoUxzvekw2aRHMQJLlnvt8UantkZg2++bEzD9EdxXqkWf4A==

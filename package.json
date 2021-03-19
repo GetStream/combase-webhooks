@@ -18,9 +18,12 @@
 		"clean": "rm -rf dist",
 		"prep": "node --es-module-specifier-resolution=node ./scripts/prepare",
 		"prestart:ingress": "yarn prep",
+		"predev:ingress": "yarn prep",
+		"dev:ingress": "yarn workspace ingress dev",
 		"start:ingress": "yarn workspace ingress start",
-		"dev:ingress": "concurrently \"yarn start:ingress\" \"yarn workspace ingress expose\"",
 		"prestart:worker": "yarn prep",
+		"predev:worker": "yarn prep",
+		"dev:worker": "yarn workspace worker dev",
 		"start:worker": "yarn workspace worker start",
 		"docker:build": "docker-compose build",
 		"docker:run": "docker-compose up -d"
@@ -31,13 +34,13 @@
 		"@captain-hook/rascal-engine": "^0.1.8",
 		"@captain-hook/source-changestreams": "^0.1.12",
 		"@combase.app/plugin-autorouting": "^0.0.9",
-		"@combase.app/plugin-sendgrid": "^0.0.11",
+		"@combase.app/plugin-sendgrid": "^0.0.12",
 		"@combase.app/plugin-stream-activity-feeds": "^0.0.8",
 		"@combase.app/plugin-zendesk": "^0.0.7",
 		"concurrently": "^6.0.0",
 		"dotenv": "^8.2.0",
 		"execa": "^5.0.0",
 		"nodemon": "^2.0.7",
-		"pino": "^6.11.1"
+		"pino": "^6.11.2"
 	}
 }

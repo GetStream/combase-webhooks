@@ -11,4 +11,4 @@ COPY yarn.lock .
 
 RUN yarn
 
-CMD [ "yarn", "start:worker" ]
+CMD [ "yarn", "dev:worker" ]

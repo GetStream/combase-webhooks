@@ -13,4 +13,4 @@ RUN yarn
 
 EXPOSE 8081
 
-CMD [ "yarn", "start:ingress" ]
+CMD [ "yarn", "dev:ingress" ]

@@ -38,6 +38,7 @@ export const createPlugin = plugins =>
 				try {
 					if (typeof this[event.trigger] === 'function') {
 						await this[event.trigger](event, this.actions(event));
+						console.log(event.trigger)
 						ackOrNack();
 					} else if (Array.isArray(this[event.trigger])) {
 						await Promise.all(this[event.trigger].map(fn => fn(event, this.actions(event))));

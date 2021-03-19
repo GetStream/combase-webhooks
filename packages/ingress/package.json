@@ -20,13 +20,14 @@
 		"body-parser": "^1.19.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
-		"mongoose": "^5.11.19",
+		"mongoose": "^5.12.1",
 		"multer": "^1.4.2",
-		"ngrok": "^3.4.0",
-		"open": "^8.0.2",
+		"ngrok": "^3.4.1",
+		"open": "^8.0.3",
 		"utils": "*"
 	},
 	"scripts": {
+		"dev": "nodemon -x 'node --es-module-specifier-resolution=node main.js' -w '../utils ./'",
 		"start": "node --es-module-specifier-resolution=node main.js",
 		"expose": "node ngrok.js"
 	}

@@ -11,7 +11,11 @@ const engine =  await CaptainRascalEngine.create(publisherConfig, true);
 
 export const capn = new CaptainHook({
     engine,
-    router: router.route,
+    router: (...args) => {
+		const data = router.route(...args);
+		console.log(data);
+		return data;
+	},
 	sources: [
 		createChangeStreamSource([
 			mongo.connection.db.collection('agents').watch(undefined, { fullDocument: 'updateLookup' }),

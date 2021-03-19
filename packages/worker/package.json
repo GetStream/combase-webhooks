@@ -16,7 +16,7 @@
 		"@captain-hook/core": "^0.3.7",
 		"@captain-hook/rascal-engine": "^0.1.8",
 		"@combase.app/plugin-autorouting": "^0.0.9",
-		"@combase.app/plugin-sendgrid": "^0.0.11",
+		"@combase.app/plugin-sendgrid": "^0.0.12",
 		"@combase.app/plugin-stream-activity-feeds": "^0.0.8",
 		"@combase.app/plugin-zendesk": "^0.0.7",
 		"deepmerge": "^4.2.2",
@@ -29,6 +29,7 @@
 	"scripts": {
 		"docker:build": "docker-compose build",
 		"docker:run": "docker-compose up -d --scale app=10",
+		"dev": "nodemon -x 'node --es-module-specifier-resolution=node ./src/main.js'  -w '../utils ./'",
 		"start": "node --es-module-specifier-resolution=node ./src/main.js"
 	}
 }
