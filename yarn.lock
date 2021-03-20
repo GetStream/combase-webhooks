@@ -83,10 +83,10 @@
     nodemailer "^6.4.17"
     nodemailer-sendgrid-transport "^0.2.0"
 
-"@combase.app/plugin-stream-activity-feeds@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@combase.app/plugin-stream-activity-feeds/-/plugin-stream-activity-feeds-0.0.10.tgz#5db59b0cbb865f2b8ac2407df3e3bddc01c4b74c"
-  integrity sha512-Y+n7+E4a9QFFybjHOPhfAM4MV9+ptLfUyA4uOJhKP/enBSc8tXBwgjC3PP1KWDfUFash8lq5vNVytfGN2QFKXA==
+"@combase.app/plugin-stream-activity-feeds@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@combase.app/plugin-stream-activity-feeds/-/plugin-stream-activity-feeds-0.0.11.tgz#aad0b416f84553cd473a748925d7d73f4ff9510b"
+  integrity sha512-Lx1otUudMhVUCNnEtnPovo9f/gavLjke4q1NgttLm5mc0EbnaaJnQAke9WJU2D99g75mE6E774Cd5IZDgLMQ4A==
   dependencies:
     "@babel/runtime" "^7.12.5"
 
