@@ -35,7 +35,7 @@
 		"@captain-hook/source-changestreams": "^0.1.12",
 		"@combase.app/plugin-autorouting": "^0.0.11",
 		"@combase.app/plugin-sendgrid": "^0.0.12",
-		"@combase.app/plugin-stream-activity-feeds": "^0.0.8",
+		"@combase.app/plugin-stream-activity-feeds": "^0.0.9",
 		"@combase.app/plugin-zendesk": "^0.0.7",
 		"concurrently": "^6.0.0",
 		"dotenv": "^8.2.0",
