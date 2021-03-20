@@ -8,6 +8,21 @@ export const combaseWebhookParser = async ({ headers, body, query }) => {
 
 	if (headers['target-agent'] === 'Stream Webhook Client') {
 		trigger = `chat:${body.type}`;
+		
+		/**
+		 * Below we check for the comnase entity of the webhook by taking the
+		 * chat event, discerning the oentity type, and then using this to pull the
+		 * custom `entity` field we set on the event objects.
+		 * 
+		 * This way, chat:user.created can be changed to chat:agent.created etc.
+		 */
+		// const [streamEntityType, triggerType] = body.type.split(':')
+		// if (body?.[streamEntityType]) {
+		// 	let { entity } = body[streamEntityType];
+		// 	entity = entity.toLowerCase();
+		// 	trigger = `chat:${entity}:${triggerType}`
+		// }
+		
 		organization  = body.channel ? body.channel.organization : body.user.organization;
 	} else if (query.id) {
 		const {id} = query;
