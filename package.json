@@ -33,7 +33,7 @@
 		"@captain-hook/core": "^0.3.8",
 		"@captain-hook/rascal-engine": "^0.1.9",
 		"@captain-hook/source-changestreams": "^0.1.13",
-		"@combase.app/plugin-autorouting": "^0.0.11",
+		"@combase.app/plugin-autorouting": "^0.0.12",
 		"@combase.app/plugin-sendgrid": "^0.0.12",
 		"@combase.app/plugin-stream-activity-feeds": "^0.0.11",
 		"@combase.app/plugin-zendesk": "^0.0.7",
