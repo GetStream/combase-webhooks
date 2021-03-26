@@ -1,31 +1,77 @@
 import gql from 'graphql-tag';
 import { graphql, logger } from 'utils';
 
+import { mongo } from './mongo';
+
 class ChatCommandsHandler {
-	tag = () => {
-		return undefined
+	getEntitiesFromEvent = (body) => {
+		const { message } = body;
+		const { id: user, organization } = body.user;
+		const [_, channelId] = message.cid.split(':');
+
+		return {
+			user,
+			organization,
+			ticket: channelId,
+		}
+	}
+
+	tag = async (body) => {
+		const { message } = body;
+
+		const {
+			organization,
+			ticket,
+			user
+		} = this.getEntitiesFromEvent(body);
+
+		const headers = {
+			'combase-organization': organization,
+		};
+		
+		const tags = message
+			.args
+			.split(',')
+			.map((str) => str.trim())
+			.filter(str => !!str)
+			.map((tag) => 
+				graphql.request(gql`
+					mutation tagTicket($ticket: MongoID!, $tag: String!) {
+						ticketAddTag(_id: $ticket, name: $tag)
+					}
+				`, { ticket, tag }, headers)
+			);
+
+		await Promise.all(tags);
+
+		message.text = `Added ${tags?.length} to this ticket.`;
+		message.type = 'ephemeral';
+		message.display = 'system';
+
+		return message;
 	};
 	
 	star = async (body) => {
 		const { message } = body;
-		const { id: user, organization } = body.user;
 
-		const [cid] = message.id?.split?.('-');
+		const {
+			organization,
+			ticket,
+			user
+		} = this.getEntitiesFromEvent(body);
+
 		const headers = {
-			'combase-organization': organization.toString(),
+			'combase-organization': organization,
 		};
-
-		console.log('channel id', cid)
-
+		
 		await graphql.request(gql`
-			mutation starTicket($cid: MongoID!) {
-				ticketAddLabel(ticket: $cid, label: starred) {
-					_id
+			mutation starTicket($ticket: MongoID!, $starred: Boolean!) {
+				ticketStar(_id: $ticket, starred: $starred) {
+					recordId
 				}
+				# TODO add create activity
 			}
-		`, { cid }, headers);
-
-		console.log('star conversation', `user: ${user}`, `organization: ${organization}`);
+		`, { ticket, starred: true }, headers);
 
 		message.text = `Ticket was starred`;
 		message.type = 'ephemeral';
@@ -34,8 +80,35 @@ class ChatCommandsHandler {
 		return message;
 	};
 
-	priority = () => {
-		return undefined
+	priority = async (body) => {
+		const { message } = body;
+
+		const {
+			organization,
+			ticket,
+			user
+		} = this.getEntitiesFromEvent(body);
+
+		const headers = {
+			'combase-organization': organization,
+		};
+
+		const level = parseInt(message.args.trim(), 10);
+
+		await graphql.request(gql`
+			mutation ticketSetPriority($ticket: MongoID!, $level: Int!) {
+				ticketSetPriority(_id: $ticket, level: $level) {
+					recordId
+				}
+			}
+		`, { ticket, level }, headers)
+
+		const levels = ['none', 'medium', 'high']
+		message.text = `Ticket priority level set to ${levels[level]}.`;
+		message.type = 'ephemeral';
+		message.display = 'system';
+
+		return message;
 	};
 
 	transfer = () => {
