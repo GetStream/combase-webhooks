@@ -111,8 +111,8 @@ class ChatCommandsHandler {
 		return message;
 	};
 
-	transfer = () => {
-		return undefined
+	transfer = async () => {
+		return undefined;
 	};
 
 	mark = () => {
