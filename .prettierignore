@@ -1,0 +1,24 @@
+*.min.js
+**/node_modules/**
+flow-typed
+**/*.md
+
+# built sites
+benchmarks/**/public
+e2e-tests/**/public
+examples/**/public
+integration-tests/**/public
+
+# cache-dirs
+**/.cache
+
+# ignore built packages
+packages/**/*.js
+!packages/*/src/**/*.js
+
+# fixtures
+**/__testfixtures__/**
+**/__tests__/fixtures/**
+
+# coverage
+coverage

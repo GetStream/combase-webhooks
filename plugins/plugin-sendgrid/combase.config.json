@@ -1,0 +1,21 @@
+{
+	"name": "Sendgrid",
+	"category": ["email"],
+	"icon": "./sendgrid.jpeg",
+	"configuration": {
+		"key": {
+			"type": "String",
+			"inputType": "password",
+			"required": true
+		},
+		"secret": {
+			"type": "String",
+			"inputType": "password",
+			"required": true
+		}
+	},
+	"triggers": {
+		"ticket.assigned": "sendEmail",
+		"email.receive": "receiveEmail"
+	}
+}

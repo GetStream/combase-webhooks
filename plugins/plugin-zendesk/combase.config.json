@@ -1,0 +1,20 @@
+{
+	"name": "Zendesk",
+	"category": ["sync", "tickets", "crm"],
+	"icon": "./zendesk.jpg",
+	"configuration": {
+		"key": {
+			"type": "String",
+			"inputType": "password",
+			"required": true
+		},
+		"secret": {
+			"type": "String",
+			"inputType": "password",
+			"required": true
+		}
+	},
+	"triggers": {
+		"zendesk:ticket.new": "createTicket"
+	}
+}

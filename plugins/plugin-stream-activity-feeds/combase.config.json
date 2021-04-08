@@ -1,0 +1,14 @@
+{
+	"name": "Activity Feeds",
+	"icon": "./stream.jpg",
+	"category": ["organization"],
+	"configuration": {},
+	"triggers": {
+		"ticket.created": "onTicketCreated",
+		"ticket.assigned": "onTicketAssigned",
+		"ticket.unassigned": "onTicketUnassigned",
+		"agent.created": "onAgentCreated",
+		"user.created": "onUserCreated"
+	},
+	"fields": {}
+}
