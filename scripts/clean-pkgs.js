@@ -82,7 +82,7 @@ const getListOfFilesToClear = async ({ location, name }) => {
   const result = await packlist({ path: location })
 
   const ig = ignore().add(gitignore)
-
+  console.log(ig);
   if (verbose) {
     console.log(`Files that will be packed for ${chalk.bold(name)}:`)
   }
@@ -90,7 +90,7 @@ const getListOfFilesToClear = async ({ location, name }) => {
   const filesToDelete = result
     .filter(file => {
       const willBeDeleted = ig.ignores(file)
-	console.log(willBeDeleted);
+
       if (verbose) {
         console.log(
           `[ ${
