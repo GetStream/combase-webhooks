@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.13 (2021-04-08)
+
+**Note:** Version bump only for package @combase.app/plugin-sendgrid
+
+
+
+
+
 ## [0.0.12](https://github.com/GetStream/combase-plugins/compare/@combase.app/plugin-sendgrid@0.0.11...@combase.app/plugin-sendgrid@0.0.12) (2021-03-19)
 
 **Note:** Version bump only for package @combase.app/plugin-sendgrid

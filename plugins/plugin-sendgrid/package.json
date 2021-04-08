@@ -1,6 +1,6 @@
 {
   "name": "@combase.app/plugin-sendgrid",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "SendGrid email support for Combase.",
   "author": "Stream.io, Inc.",
   "private": false,
@@ -28,7 +28,7 @@
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
-    "@combase.app/babel-preset-combase-plugin": "^0.0.5",
+    "@combase.app/babel-preset-combase-plugin": "^0.0.6",
     "cross-env": "^7.0.3"
   }
 }
