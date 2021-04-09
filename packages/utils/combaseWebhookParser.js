@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import { graphql } from './graphql';
+import { logger } from './logger';
 // TODO: Ticket created is being caught rn from changestreams and used for routing - this should com from the chat webhooks - we need to catch them below and create event from stream chat webhooks
 export const combaseWebhookParser = async ({ headers, body, query }) => {
 	let organization;
@@ -10,8 +11,8 @@ export const combaseWebhookParser = async ({ headers, body, query }) => {
 		trigger = `chat:${body.type}`;
 		
 		/**
-		 * Below we check for the comnase entity of the webhook by taking the
-		 * chat event, discerning the oentity type, and then using this to pull the
+		 * Below we check for the combase entity of the webhook by taking the
+		 * chat event, discerning the entity type, and then using this to pull the
 		 * custom `entity` field we set on the event objects.
 		 * 
 		 * This way, chat:user.created can be changed to chat:agent.created etc.

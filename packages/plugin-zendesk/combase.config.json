@@ -3,18 +3,24 @@
 	"category": ["sync", "tickets", "crm"],
 	"icon": "./zendesk.jpg",
 	"configuration": {
-		"key": {
+		"user": {
+			"type": "String",
+			"inputType": "email",
+			"required": true
+		},
+		"token": {
 			"type": "String",
 			"inputType": "password",
 			"required": true
 		},
-		"secret": {
+		"subdomain": {
 			"type": "String",
-			"inputType": "password",
+			"inputType": "text",
 			"required": true
 		}
 	},
 	"triggers": {
-		"zendesk:ticket.new": "createTicket"
+		"zendesk:ticket.new": "createTicket",
+		"chat:channel.created": "syncTicket"
 	}
 }

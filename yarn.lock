@@ -2646,10 +2646,15 @@ async-each@^1.0.1:
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.3.tgz#b727dbf87d7651602f06f4d4ac387f47d91b0cbf"
   integrity sha512-z/WhQ5FPySLdvREByI2vZiTWwCnF0moMJ1hK9YQwDTHKh6I7/uSckMetoRGb5UBZPC1z0jlw+n/XCgjeH7y1AQ==
 
-async@^3.2.0:
+async@3.2.x, async@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/async/-/async-3.2.0.tgz#b3a2685c5ebb641d3de02d161002c60fc9f85720"
   integrity sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==
+
+async@^1.4.0:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
+  integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -5853,7 +5858,7 @@ ini@1.3.7:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.7.tgz#a09363e1911972ea16d7a8851005d84cf09a9a84"
   integrity sha512-iKpRpXP+CrP2jyrxvg1kMUpXDyRUFDWurxbnVT1vQPx+Wz9uCYsMIqYuSBLV+PAaZG/d7kRLKRFc9oDMsH+mFQ==
 
-ini@^1.3.2, ini@^1.3.4, ini@~1.3.0:
+ini@^1.3.0, ini@^1.3.2, ini@^1.3.4, ini@~1.3.0:
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
@@ -7782,6 +7787,16 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+nconf@0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/nconf/-/nconf-0.11.0.tgz#585fb59ec1360b8179361fb7a2dae4f71cd2ebaa"
+  integrity sha512-c4W7QqYF6p5BC7J/eVTOvtUlQgvS5CgbJ11xgjhSr8yyius7km7xgdIYHkFLR4TWY1HjsFkia/3l5OprGqCHvA==
+  dependencies:
+    async "^1.4.0"
+    ini "^1.3.0"
+    secure-keys "^1.0.0"
+    yargs "^16.1.1"
+
 negotiator@0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
@@ -7869,6 +7884,16 @@ node-releases@^1.1.70:
   version "1.1.71"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.71.tgz#cb1334b179896b1c89ecfdd4b725fb7bbdfc7dbb"
   integrity sha512-zR6HoT6LrLCRBwukmrVbHv0EpEQjksO6GmFcZQQuCAy139BEsoVKPYnf3jongYW83fAa1torLGYwxxky/p28sg==
+
+node-zendesk@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/node-zendesk/-/node-zendesk-2.0.6.tgz#9e189b6222003ef3bd8b60a259df8db902c3b95c"
+  integrity sha512-efCRryoVnx8x3EE1iksp9+YCs7V8pjLboSMlW/0FUD0F2LAdJ70Z5K27ROQHy+zPehsWFVVpjwSaQ8i88AH7ig==
+  dependencies:
+    async "3.2.x"
+    nconf "0.11.0"
+    querystring "0.2.x"
+    request "2.88.2"
 
 nodemailer-sendgrid-transport@^0.2.0:
   version "0.2.0"
@@ -8812,6 +8837,11 @@ query-string@^6.13.8:
     split-on-first "^1.0.0"
     strict-uri-encode "^2.0.0"
 
+querystring@0.2.x:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.1.tgz#40d77615bb09d16902a85c3e38aa8b5ed761c2dd"
+  integrity sha512-wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg==
+
 querystringify@^2.1.1:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
@@ -9237,7 +9267,7 @@ request-promise-native@^1.0.9:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@^2.55.0, request@^2.60.0, request@^2.88.0, request@^2.88.2:
+request@2.88.2, request@^2.55.0, request@^2.60.0, request@^2.88.0, request@^2.88.2:
   version "2.88.2"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.2.tgz#d73c918731cb5a87da047e207234146f664d12b3"
   integrity sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==
@@ -9475,6 +9505,11 @@ saxes@^5.0.1:
   integrity sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==
   dependencies:
     xmlchars "^2.2.0"
+
+secure-keys@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/secure-keys/-/secure-keys-1.0.0.tgz#f0c82d98a3b139a8776a8808050b824431087fca"
+  integrity sha1-8MgtmKOxOah3aogIBQuCRDEIf8o=
 
 semver-compare@^1.0.0:
   version "1.0.0"
@@ -11115,7 +11150,7 @@ yargs@^15.4.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^16.2.0:
+yargs@^16.1.1, yargs@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.2.0.tgz#1c82bf0f6b6a66eafce7ef30e376f49a12477f66"
   integrity sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==

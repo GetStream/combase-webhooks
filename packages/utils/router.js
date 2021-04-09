@@ -51,7 +51,6 @@ export class Router {
     createEventFromWebhook = async data => {
 		try {
 			const eventMeta = await combaseWebhookParser(data);
-
 			this.validateTrigger(eventMeta?.trigger)
 			
 			return {
@@ -83,7 +82,7 @@ export class Router {
 
                 break;
         }
-
+		logger.info(`${payload?.trigger}`);
         /**
          * Router must return either a single event object,
          * or an array of event objects

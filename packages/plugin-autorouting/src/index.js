@@ -49,7 +49,7 @@ export const assignTicket = async (event, {gql, log, request}) => {
 					}
 				`
 			);
-			log.info(JSON.stringify(agents));
+
 			let agent;
 
 			/** No Agents - Set Unavailable */
