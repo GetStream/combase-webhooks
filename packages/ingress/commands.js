@@ -44,7 +44,7 @@ class ChatCommandsHandler {
 
 		await Promise.all(tags);
 
-		message.text = `Added ${tags?.length} to this ticket.`;
+		message.text = `Added ${tags?.length} tag${tags?.length === 1 ? '' : 's'} to this ticket.`;
 		message.type = 'ephemeral';
 		message.display = 'system';
 

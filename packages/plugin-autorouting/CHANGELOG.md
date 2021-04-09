@@ -3,9 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 0.0.13 (2021-04-08)
+## [0.0.13](https://github.com/GetStream/combase-plugins/compare/@combase.app/plugin-autorouting@0.0.13...@combase.app/plugin-autorouting@0.0.13) (2021-04-08)
 
-**Note:** Version bump only for package @combase.app/plugin-autorouting
+
+### Reverts
+
+* Revert "chore(release): publish" ([32b9c61](https://github.com/GetStream/combase-plugins/commit/32b9c6198fb5b69d7b94db85482b92425e1526a4))
+* Revert "chore(release): publish" ([b3e3740](https://github.com/GetStream/combase-plugins/commit/b3e374042aeae46cecdd9c97bfed0f0e784dfa0b))
 
 
 
