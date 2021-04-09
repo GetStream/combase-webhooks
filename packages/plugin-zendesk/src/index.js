@@ -55,28 +55,56 @@ export const syncTicket = async ({ data, organization, trigger }, { gql, request
 
 	if (response?.integrationLookup) {
 		const { credentials } = response?.integrationLookup
-		const { channel } = data.body;
 		
 		let obj = {};
 		credentials.forEach(({ key, value }) => {
 			obj[key] = value
 		});
-		const { user, token, subdomain } = obj;
+		const { user: username, token, subdomain } = obj;
 
 		const client = zendesk.createClient({
-			username:  user,
-			token:     token,
+			username,
+			token,
 			remoteUri: `https://${subdomain}.zendesk.com/api/v2`
 		});
 
 		try {
+			let existingUserId = data.body.user?.meta?.zendeskId;
+			log.info(`USER: ${existingUserId}`);
+
+			if (!existingUserId) {
+				const user = await client.users.create({
+					user: {
+						name: data.body.user.name,
+						email: data.body.user.email,
+						role: 'end-user',
+						verified: true,
+					}
+				});
+
+				await request(gql`
+					mutation addUserZendeskId($_id: MongoID!, $record: UpdateByIdUserInput!) {
+						userUpdate(_id: $_id, record: $record) {
+								record {
+							name
+							meta
+							}
+						}
+					}
+				`, { _id: data.body.user.id, record: { meta: { zendeskId: user.id } }  });
+
+				existingUserId = user.id;
+			}
+
 			const ticket = {
 				"ticket": {
-					"subject":"New Ticket",
+					"subject": "New Ticket",
 					"comment": {
 						"body": "Ticket created by Combase"
-					}
-				}
+					},
+					"submitter_id": existingUserId,
+					"requester_id": existingUserId,
+				},
 			};
 			await client.tickets.create(ticket);
 		} catch (error) {
