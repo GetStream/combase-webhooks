@@ -21,6 +21,8 @@
 	},
 	"triggers": {
 		"zendesk:ticket.new": "createTicket",
-		"chat:channel.created": "syncTicket"
+		"chat:channel.created": "syncTicketCreate",
+		"chat:message.new": "syncTicketMessage",
+		"agent.created": "syncAgentCreate"
 	}
 }
