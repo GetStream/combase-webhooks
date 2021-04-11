@@ -1,22 +1,47 @@
-import zendesk from 'node-zendesk';
+import {createZendeskClient} from './utils';
 
-const createZendeskClient = (integration) => {
-	let obj = {};
-	integration.credentials.forEach(({ key, value }) => {
-		obj[key] = value
-	});
-	const { user: username, token, subdomain } = obj;
+/**
+ * Checks that an integration exists for the authenticated Organization,
+ * and that it is enabled.
+ * 
+ * @param {*} event 
+ * @param {*} actions 
+ * @returns integration data
+ */
+export const lookupIntegration = async ({ organization  }, { gql, request }) => {
+	//TODO: validate trigger again??
+	const data = await request(gql`
+		query lookupIntegration($organization: MongoID!, $triggers: JSON!) {
+			integrationLookup(organization: $organization, triggers: $triggers) {
+				_id
+				name
+				enabled
+				credentials {
+					key: name
+					value
+				}
+			}
+		}
+	`, 
+		{
+			organization,
+			triggers: ["zendesk:ticket.new"]
+		}
+	);
 
-	const client = zendesk.createClient({
-		username,
-		token,
-		remoteUri: `https://${subdomain}.zendesk.com/api/v2`
-	});
-
-	return client;
+	if (data?.integrationLookup?.enabled) {
+		return data?.integrationLookup;
+	}
 }
 
-
+/**
+ * Create a new ticket in Combase when a ticket is created in Zendesk, also does a find or create on the 
+ * user via their email address.
+ * zendesk:ticket.new
+ * 
+ * @param {*} event 
+ * @param {*} actions 
+ */
 export const createTicket = async ({ data, organization, trigger }, { gql, request, log }) => {
 	const {name, email, message, ticketID} = data.body;
 
@@ -47,38 +72,31 @@ export const createTicket = async ({ data, organization, trigger }, { gql, reque
 	);
 };
 
-export const syncTicketCreate = async ({ data, organization, trigger }, { gql, request, log }) => {
-	const response = await request(gql`
-		query lookupIntegration($organization: MongoID!, $triggers: JSON!) {
-			integrationLookup(organization: $organization, triggers: $triggers) {
-				_id
-				name
-				enabled
-				credentials {
-					key: name
-					value
-				}
-			}
-		}
-	`, 
-		{
-			organization,
-			triggers: ["zendesk:ticket.new"]
-		}
-	);
+/**
+ * Create a new ticket in Zendesk when a ticket is created in Combase
+ * chat:channel.created
+ * 
+ * @param {*} event 
+ * @param {*} actions 
+ */
+export const syncTicketCreate = async (event, actions) => {
+	const integration = await lookupIntegration(event, actions);
 
-	if (response?.integrationLookup?.enabled) {
-		const client = createZendeskClient(response?.integrationLookup);
+	const { data } = event; 
+	const { gql, request, log } = actions;
+
+	if (integration) {
+		const { channel, user } = data.body; // Stream channel.created payload.
+		const client = createZendeskClient(integration);
 
 		try {
-			let existingUserId = data.body.user?.meta?.zendeskId;
-			log.info(`USER: ${existingUserId}`);
+			let existingUserId = user?.meta?.zendeskId;
 
 			if (!existingUserId) {
-				const user = await client.users.create({
+				const zendeskUser = await client.users.create({
 					user: {
-						name: data.body.user.name,
-						email: data.body.user.email,
+						name: user.name,
+						email: user.email,
 						role: 'end-user',
 						verified: true,
 					}
@@ -94,18 +112,18 @@ export const syncTicketCreate = async ({ data, organization, trigger }, { gql, r
 						}
 					}
 				`, { 
-					_id: data.body.user.id, 
+					_id: user.id, 
 					record: { 
 						meta: { 
-							zendeskId: user.id,
+							zendeskId: zendeskUser.id,
 						} 
 					}
 				});
 
-				existingUserId = user.id;
+				existingUserId = zendeskUser.id;
 			}
 
-			const ticket = await client.tickets.create({
+			const zendeskTicket = await client.tickets.create({
 				"ticket": {
 					"subject": "New Ticket",
 					"comment": {
@@ -122,36 +140,29 @@ export const syncTicketCreate = async ({ data, organization, trigger }, { gql, r
 						recordId
 					}
 				}
-			`, { _id: data.body.channel.id, record: { meta: { zendeskId: ticket.id } }  });
+			`, { _id: channel.id, record: { meta: { zendeskId: zendeskTicket.id } }  });
 		} catch (error) {
 			log.error(error.message);
 		}
 	}
 };
 
-export const syncTicketMessage = async ({ data, organization, trigger }, { gql, request, log }) => {
-	const response = await request(gql`
-		query lookupIntegration($organization: MongoID!, $triggers: JSON!) {
-			integrationLookup(organization: $organization, triggers: $triggers) {
-				_id
-				name
-				enabled
-				credentials {
-					key: name
-					value
-				}
-			}
-		}
-	`, 
-		{
-			organization,
-			triggers: ["zendesk:ticket.new"]
-		}
-	);
+/**
+ * Create a new comment on the corresponding Zendesk ticket when a Combase message is sent
+ * chat:message.new
+ * 
+ * @param {*} event 
+ * @param {*} actions 
+ */
+export const syncTicketMessage = async (event, actions) => {
+	const integration = await lookupIntegration(event, actions);
 
-	if (response?.integrationLookup) {
-		const client = createZendeskClient(response?.integrationLookup);
-		const { channel_id } = data.body;
+	const { data } = event; 
+	const { gql, request, log } = actions;
+
+	if (integration) {
+		const client = createZendeskClient(integration);
+		const { channel_id } = data.body; // stream message.new payload
 
 		try {
 			const {ticket} = await request(gql`
@@ -163,57 +174,58 @@ export const syncTicketMessage = async ({ data, organization, trigger }, { gql, 
 			`, { _id: channel_id });
 			
 			const { zendeskId: ticketZendeskId } = ticket.meta;
-			const users = await client.users.search({
-				query: data.body.user.meta.zendeskId,
-			});
+			
+			let userZendeskId = data.body.user.meta?.zendeskId;
+			
+			if (!userZendeskId) {
+				const users = await client.users.search({
+					query: data.body.user.email,
+				});
 
-			console.log(users);
-			const [{ id: userZendeskId }] = users;
+				const [result] = users;
+				userZendeskId = result.id;
+			}
 
-			await client.tickets.update(ticketZendeskId, {
-				"ticket": {
-					"comment": {
-						"body": data.body.message.text,
+			if (userZendeskId) {
+				await client.tickets.update(ticketZendeskId, {
+					"ticket": {
+						"comment": {
+							"author_id": userZendeskId,
+							"body": data.body.message.text,
+						},
 					},
-					"submitter_id": userZendeskId,
-					"requester_id": userZendeskId,
-				},
-			});
+				});
+			} else {
+				log.error(`No Zendesk ID found for: <${data.body.user.email}>${data.body.user.id}`)
+			}
 		} catch (error) {
 			log.error(error.message);
 		}
 	}
 };
 
-export const syncAgentCreate = async ({ data, organization, trigger }, { gql, request, log }) => {
-	log.info(JSON.stringify(data));
-	const response = await request(gql`
-		query lookupIntegration($organization: MongoID!, $triggers: JSON!) {
-			integrationLookup(organization: $organization, triggers: $triggers) {
-				_id
-				name
-				enabled
-				credentials {
-					key: name
-					value
-				}
-			}
-		}
-	`, 
-		{
-			organization,
-			triggers: ["zendesk:ticket.new"]
-		}
-	);
+/**
+ * Create a new agent in Zendesk when a new Combase agent is created
+ * agent.created
+ * 
+ * @param {*} event 
+ * @param {*} actions 
+ */
+export const syncAgentCreate = async (event, actions) => {
+	const integration = await lookupIntegration(event, actions);
 
-	if (response?.integrationLookup) {
-		const client = createZendeskClient(response?.integrationLookup);
-		const { fullDocument: agentDoc } = data.body;
+	const { data } = event; 
+	const { gql, request, log } = actions;
+
+	if (integration) {
+		const client = createZendeskClient(integration);
+		const { fullDocument: agent } = data.body;
+
 		try {
-			const agent = await client.users.create({
+			const zendeskAgent = await client.users.create({
 				user: {
-					name: agentDoc.name.full,
-					email: agentDoc.email,
+					name: agent.name.full,
+					email: agent.email,
 					role: 'agent',
 					verified: true,
 				}
@@ -228,10 +240,10 @@ export const syncAgentCreate = async ({ data, organization, trigger }, { gql, re
 					}
 				}
 			`, { 
-				_id: agentDoc._id, 
+				_id: agent._id, 
 				record: { 
 					meta: { 
-						zendeskId: agent.id,
+						zendeskId: zendeskAgent.id,
 					} 
 				}
 			});
