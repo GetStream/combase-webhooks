@@ -1,6 +1,6 @@
 {
   "name": "@combase.app/plugin-zendesk",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Zendesk sync for Combase.",
   "author": "Stream.io, Inc.",
   "private": false,
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
-    "@combase.app/babel-preset-combase-plugin": "^0.0.6",
+    "@combase.app/babel-preset-combase-plugin": "^0.0.7",
     "cross-env": "^7.0.3"
   }
 }

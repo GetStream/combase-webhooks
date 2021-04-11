@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.14](https://github.com/GetStream/combase-plugins/compare/@combase.app/plugin-stream-activity-feeds@0.0.13...@combase.app/plugin-stream-activity-feeds@0.0.14) (2021-04-11)
+
+**Note:** Version bump only for package @combase.app/plugin-stream-activity-feeds
+
+
+
+
+
 ## [0.0.13](https://github.com/GetStream/combase-plugins/compare/@combase.app/plugin-stream-activity-feeds@0.0.13...@combase.app/plugin-stream-activity-feeds@0.0.13) (2021-04-08)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@combase.app/babel-preset-combase-plugin",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Preconfigured babel setup for easier Combase plugin development.",
   "author": "Stream.io, Inc.",
   "private": false,
