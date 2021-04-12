@@ -82,8 +82,10 @@ export class Router {
 
                 break;
         }
-		logger.info(`${payload?.trigger}`);
-        /**
+
+		if (payload?.trigger) logger.info(`Received: ${payload?.trigger}`);
+        
+		/**
          * Router must return either a single event object,
          * or an array of event objects
          * Event objects must have a `type` property

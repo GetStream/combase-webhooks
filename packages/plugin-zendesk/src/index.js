@@ -8,7 +8,7 @@ import {createZendeskClient} from './utils';
  * @param {*} actions 
  * @returns integration data
  */
-export const lookupIntegration = async ({ organization  }, { gql, request }) => {
+export const lookupIntegration = async ({ organization, trigger }, { gql, request }) => {
 	//TODO: validate trigger again??
 	const data = await request(gql`
 		query lookupIntegration($organization: MongoID!, $triggers: JSON!) {
@@ -25,7 +25,7 @@ export const lookupIntegration = async ({ organization  }, { gql, request }) => 
 	`, 
 		{
 			organization,
-			triggers: ["zendesk:ticket.new"]
+			triggers: [trigger]
 		}
 	);
 
@@ -42,34 +42,65 @@ export const lookupIntegration = async ({ organization  }, { gql, request }) => 
  * @param {*} event 
  * @param {*} actions 
  */
-export const createTicket = async ({ data, organization, trigger }, { gql, request, log }) => {
+export const createTicket = async (event, actions) => {
+	const { data, organization, trigger } = event; 
+	const { gql, request, log } = actions;
+
 	const {name, email, message, ticketID} = data.body;
 
 	const parts = message.split(/\n/g);
 	const text = parts.slice(3).join('\n\n');
 
-	log.info(`☎️  Zendesk Event from User: ${name} <${email}> for Org: ${organization}`);
-
-	return request(gql`
-		mutation ($record: CreateTicketInput!, $user: UserInput!) {
-			ticketCreate(record: $record, user: $user) {
-				recordId
+	const existing = await request(gql`
+		query getTicket($filter: FilterFindOneTicketInput!) {
+			ticket: ticketFind(filter: $filter) {
+				_id
 			}
 		}
-	`, 
-		{
-			record: {
-				message: text,
-				meta: { 
-					zendeskId: ticketID 
-				}
-			},
-			user: {
-				email,
-				name,
-			},
+	`, {
+		filter: {
+			organization,
+			meta: {
+				zendeskId: ticketID,
+			}
 		}
-	);
+	});
+
+	if (existing.ticket) {
+		log.info(`UPDATE TICKET COMMENTS FOR: ${existing.ticket._id}:${ticketID}`);
+		const integration = await lookupIntegration(event, actions);
+
+		if (integration) {
+			const client = createZendeskClient(integration);
+
+			let comments = await client.tickets.getComments(ticketZendeskId);
+			log.info(`COMMENTS: \n\n ${JSON.stringify(comments)}`)
+		}
+
+	} else {
+		log.info(`☎️  Zendesk Ticket from User: ${name} <${email}> for Org: ${organization}`);
+
+		return request(gql`
+			mutation ($record: CreateTicketInput!, $user: UserInput!) {
+				ticketCreate(record: $record, user: $user) {
+					recordId
+				}
+			}
+		`, 
+			{
+				record: {
+					message: text,
+					meta: { 
+						zendeskId: ticketID 
+					}
+				},
+				user: {
+					email,
+					name,
+				},
+			}
+		);
+	}
 };
 
 /**
