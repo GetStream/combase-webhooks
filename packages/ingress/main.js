@@ -114,6 +114,7 @@ app.post('/zendesk/confirm', async (req, res) => {
 			organization: organization_id,
 		}
 
+		// TODO: If updating the integration in Zendesk - this should be integrationUpdate...
 		const createIntegration = await graphql.request(
 			gql`
 				mutation createZendeskIntegration($record: CreateOneIntegrationInput!) {
