@@ -83,7 +83,7 @@ export class Router {
                 break;
         }
 
-		if (payload?.trigger) logger.info(`Received: ${payload?.trigger}`);
+		if (payload?.trigger) logger.info(`Received: ${payload?.trigger} for Org<${payload.organization}>`);
         
 		/**
          * Router must return either a single event object,

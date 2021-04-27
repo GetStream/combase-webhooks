@@ -1,28 +1,12 @@
 import gql from 'graphql-tag';
 import { graphql } from './graphql';
-import { logger } from './logger';
-// TODO: Ticket created is being caught rn from changestreams and used for routing - this should com from the chat webhooks - we need to catch them below and create event from stream chat webhooks
+
 export const combaseWebhookParser = async ({ headers, body, query }) => {
 	let organization;
 	let trigger;
-	
 
 	if (headers['target-agent'] === 'Stream Webhook Client') {
 		trigger = `chat:${body.type}`;
-		
-		/**
-		 * Below we check for the combase entity of the webhook by taking the
-		 * chat event, discerning the entity type, and then using this to pull the
-		 * custom `entity` field we set on the event objects.
-		 * 
-		 * This way, chat:user.created can be changed to chat:agent.created etc.
-		 */
-		// const [streamEntityType, triggerType] = body.type.split(':')
-		// if (body?.[streamEntityType]) {
-		// 	let { entity } = body[streamEntityType];
-		// 	entity = entity.toLowerCase();
-		// 	trigger = `chat:${entity}:${triggerType}`
-		// }
 		
 		organization  = body.channel ? body.channel.organization : body.user.organization;
 	} else if (query.id) {
@@ -54,6 +38,9 @@ export const combaseWebhookParser = async ({ headers, body, query }) => {
 	} else if (query.trigger === 'sendgrid.receive') {
 		organization = body.to.split('@')[0];
 		trigger = 'email.receive';
+	} else if (query.trigger.startsWith('zendesk.')) {
+		organization = JSON.parse(body.metadata).organization_id;
+		trigger = query.trigger;
 	}
 
 	return {
