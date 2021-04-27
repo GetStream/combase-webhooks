@@ -20,9 +20,8 @@
 		}
 	},
 	"triggers": {
-		"zendesk.sync": "createTicket",
-		"chat:channel.created": "syncTicketCreate",
-		"chat:message.new": "syncTicketMessage",
-		"agent.created": "syncAgentCreate"
+		"zendesk.pull": "handlePull",
+		"zendesk.clickthrough": "handleClickthrough",
+		"zendesk.channelback": "handleChannelback"
 	}
 }
