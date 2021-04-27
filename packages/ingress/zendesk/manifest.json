@@ -1,0 +1,13 @@
+{
+  "name": "Combase Channel",
+  "id": "combase-channel-1a2b3c",
+  "author":  "Stream",
+  "version": "0.0.2",
+  "channelback_files": true,
+  "create_followup_tickets": false,
+  "urls": {
+	"admin_ui": "https://combase-webhooks.ngrok.io/zendesk/admin-ui.html",
+	"pull_url": "https://combase-webhooks.ngrok.io/webhook/?trigger=zendesk.pull",
+	"channelback_url": "https://combase-webhooks.ngrok.io/webhook/?trigger=zendesk.channelback"
+  }
+}

@@ -37,7 +37,7 @@ export const lookupIntegration = async ({ organization, trigger }, { gql, reques
 /**
  * Create a new ticket in Combase when a ticket is created in Zendesk, also does a find or create on the 
  * user via their email address.
- * zendesk:ticket.new
+ * zendesk.sync
  * 
  * @param {*} event 
  * @param {*} actions 
