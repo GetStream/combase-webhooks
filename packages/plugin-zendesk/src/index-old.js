@@ -53,30 +53,33 @@ export const lookupIntegration = async ({ organization, trigger }, { gql, log, r
 }
 
 /**
- * Create a new ticket in Zendesk when a ticket is created in Combase
+ * Push new content to the Combase Zendesk Channel.
  * chat:channel.created
  * 
  * @param {*} event 
  * @param {*} actions 
  */
+// TODO: In The Combase API - save the first message as "subject" - we can then query for it rather than fallback to "Created by Combase".
 export const pushToZendesk = async (event, actions) => {
 	const integration = await lookupIntegration(event, actions);
 
 	const { data } = event; 
-	const { gql, request, log } = actions;
+	const { log } = actions;
 
 	if (integration) {
-		const { channel_id, created_at, message, user } = data.body; // Stream channel.created payload.
 		const {
 			subdomain,
 			access_token,
 			instance_push_id,
 		} = parseCredentials(integration);
+		
+		const { channel_id, created_at, message } = data.body; // Stream channel.created payload.
+		const user = message?.user || data.body.user; // prefer the message user.
 
 		try {
-			const { body: zendeskTicket } = await p({
-				'method': 'POST',
-				'timeout': 2000,
+			await p({
+				method: 'POST',
+				timeout: 2000,
 				parse: 'json',
 				url: `https://${subdomain}.zendesk.com/api/v2/any_channel/push.json`,
 				headers: {
@@ -87,8 +90,8 @@ export const pushToZendesk = async (event, actions) => {
 					instance_push_id,
 					external_resources: [{
 						external_id: channel_id,
-						message: message.text,
-						html_message: message.html,
+						message: message?.text || 'Created by Combase',
+						html_message: message?.html || '<p>Created by Combase</p>',
 						created_at,
 						author: {
 							external_id: user.id,
@@ -99,14 +102,6 @@ export const pushToZendesk = async (event, actions) => {
 					}]
 				}
 			});
-
-			// await request(gql`
-			// 	mutation updateTicketMeta($_id: MongoID!, $record: UpdateByIdTicketInput!) {
-			// 		ticketUpdate(_id: $_id, record: $record) {
-			// 			recordId
-			// 		}
-			// 	}
-			// `, { _id: channel_id, record: { meta: { zendeskId: zendeskTicket.id } }  });
 		} catch (error) {
 			log.error(error.message);
 		}

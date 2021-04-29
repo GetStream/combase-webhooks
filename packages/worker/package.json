@@ -13,7 +13,7 @@
 	},
 	"private": true,
 	"dependencies": {
-		"@captain-hook/core": "^0.3.8",
+		"@captain-hook/core": "^0.3.9",
 		"@captain-hook/rascal-engine": "^0.1.9",
 		"@combase.app/plugin-autorouting": "*",
 		"@combase.app/plugin-sendgrid": "*",

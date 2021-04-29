@@ -2,26 +2,8 @@
 	"name": "Zendesk",
 	"category": ["sync", "tickets", "crm"],
 	"icon": "./zendesk.jpg",
-	"configuration": {
-		"user": {
-			"type": "String",
-			"inputType": "email",
-			"required": true
-		},
-		"token": {
-			"type": "String",
-			"inputType": "password",
-			"required": true
-		},
-		"subdomain": {
-			"type": "String",
-			"inputType": "text",
-			"required": true
-		}
-	},
+	"configuration": {},
 	"triggers": {
-		"zendesk.pull": "handlePull",
-		"zendesk.clickthrough": "handleClickthrough",
-		"zendesk.channelback": "handleChannelback"
+		"chat:message.new": "pushToZendesk"
 	}
 }
