@@ -34,6 +34,8 @@ const resolvePlugin = pluginName => {
 		icon = fs.existsSync(iconPath) ? fs.readFileSync(iconPath, { encoding: 'base64' }) : undefined;
 	}
 
+	const about = fs.readFileSync(`${pathToPluginDir}/about.md`, `utf-8`).toString();
+
 	const internal = {
 		path: pathToPluginDir,
 		name: packageJSON.name,
@@ -42,6 +44,7 @@ const resolvePlugin = pluginName => {
 
 	return {
 		...configJSON,
+		about,
 		// icon,
 		internal: {
 			...internal,
