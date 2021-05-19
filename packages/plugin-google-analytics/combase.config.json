@@ -1,0 +1,15 @@
+{
+	"name": "Google Analytics",
+	"category": ["analytics"],
+	"icon": "./ga.jpg",
+	"configuration": {
+		"trackingId": {
+			"type": "String",
+			"inputType": "text",
+			"required": true
+		}
+	},
+	"triggers": {
+		"chat:channel.created": "onChannelCreated"
+	}
+}

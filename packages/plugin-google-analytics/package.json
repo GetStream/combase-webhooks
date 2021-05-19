@@ -1,0 +1,33 @@
+{
+  "name": "@combase.app/plugin-google-analytics",
+  "version": "0.0.1",
+  "description": "Track Combase events in Google Analytics.",
+  "author": "Stream.io, Inc.",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GetStream/combase-plugins.git",
+    "directory": "packages/plugin-google-analytics"
+  },
+  "scripts": {
+    "build": "babel src --out-dir . --ignore \"**/__tests__\"",
+    "watch": "babel -w src --out-dir . --ignore \"**/__tests__\"",
+    "prepare": "cross-env NODE_ENV=production yarn build"
+  },
+  "dependencies": {
+    "@analytics/google-analytics": "^0.5.2",
+    "@babel/runtime": "^7.12.5",
+    "analytics": "^0.7.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@combase.app/babel-preset-combase-plugin": "^0.0.7",
+    "cross-env": "^7.0.3"
+  }
+}
