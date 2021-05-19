@@ -20,7 +20,7 @@ const parseCredentials = (integration) => {
  * @param {*} actions 
  * @returns integration data
  */
-export const lookupIntegration = async ({ organization, trigger }, { gql, log, request }) => {
+export const lookupIntegration = async ({ data: { organization, trigger } }, { gql, log, request }) => {
 	try {
 		//? TODO: validate trigger again
 		const data = await request(gql`
