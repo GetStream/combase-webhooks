@@ -1,0 +1,15 @@
+{
+	"name": "Hubspot",
+	"category": ["analytics"],
+	"icon": "./hubspot.jpg",
+	"configuration": {
+		"portalId": {
+			"type": "String",
+			"inputType": "text",
+			"required": true
+		}
+	},
+	"triggers": {
+		"chat:channel.created": "onChannelCreated"
+	}
+}
