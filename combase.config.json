@@ -4,6 +4,7 @@
 		"@combase.app/plugin-autorouting",
 		"@combase.app/plugin-stream-activity-feeds",
 		"@combase.app/plugin-zendesk",
-		"@combase.app/plugin-google-analytics"
+		"@combase.app/plugin-google-analytics",
+		"@combase.app/plugin-hubspot"
 	]
 }
