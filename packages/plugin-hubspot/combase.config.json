@@ -1,9 +1,14 @@
 {
 	"name": "Hubspot",
 	"category": ["analytics"],
-	"icon": "./hubspot.jpg",
+	"icon": "./hubspot.png",
 	"configuration": {
 		"portalId": {
+			"type": "String",
+			"inputType": "text",
+			"required": true
+		},
+		"propertyName": {
 			"type": "String",
 			"inputType": "text",
 			"required": true
