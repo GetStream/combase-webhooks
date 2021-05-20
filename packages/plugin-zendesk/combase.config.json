@@ -4,6 +4,6 @@
 	"icon": "./zendesk.jpg",
 	"configuration": {},
 	"triggers": {
-		"chat:message.new": "pushToZendesk"
-	}
+		"zendesk.push": "pushToZendesk"
+	},
 }
