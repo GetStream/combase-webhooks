@@ -4,12 +4,11 @@ export const onChannelCreated = async (event, {gql, log, request}) => {
 	// TODO: Get API Key, Portal ID and "combase" property name from integration in mongo
 	// TODO: Also add setup instructions for the above in about.md
 	const hubspot = new Hubspot({ 
-		apiKey: 'API_KEY_HERE'
+		apiKey: 'API_KEY'
 	});
 
 	try {
 		const { user } = event.data.body;
-		log.info('hubspot fired');
 
 		const properties = [
 			{
