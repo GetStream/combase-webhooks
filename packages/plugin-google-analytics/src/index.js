@@ -11,13 +11,13 @@ const analytics = Analytics({
   });
 
 export const trackChatEvent = async (event) => {
-	const { data: { body, trigger } } = event;
+	const { data: { body }, trigger } = event;
 	
 	const user = body.user || body.message?.user || body?.channel?.created_by;
 
 	/* Track event in GA with the trigger string as the event name */
 	await analytics.track(trigger, {
-		createdAt: data.body.created_at,
+		createdAt: body.created_at,
 	});
 	
 	/* Identify the user */
