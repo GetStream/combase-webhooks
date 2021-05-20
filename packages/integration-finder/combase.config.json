@@ -1,0 +1,14 @@
+{
+	"name": "Autorouting",
+	"category": ["organization"],
+	"icon": "./stream.jpg",
+	"configuration": {},
+	"triggers": {
+		"chat:channel.created": "assignTicket"
+	},
+	"fields": {
+		"Organization": [
+			"name"
+		]
+	}
+}
