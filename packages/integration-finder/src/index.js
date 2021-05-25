@@ -1,11 +1,3 @@
-const parseCredentials = (integration) => {
-	let obj = {};
-	integration.credentials.forEach(({ key, value }) => {
-		obj[key] = value
-	});
-	return obj;
-};
-
 /**
  * Checks that an integration exists for the authenticated Organization,
  * and that it is enabled.
@@ -39,9 +31,7 @@ export const integrationFinder = async (uid, { data: { organization } }, { gql, 
 		);
 
 		if (data?.integrationLookup?.enabled) {
-			const integration = data?.integrationLookup;
-			const credentials = parseCredentials(integration);
-			return [integration, credentials];
+			return data?.integrationLookup;
 		}
 
 		return undefined;
@@ -49,3 +39,14 @@ export const integrationFinder = async (uid, { data: { organization } }, { gql, 
 		log.error(error.message)
 	}
 }
+
+/**
+ * Maps the decrypted credential values back into a standard key/value pair object.
+ */
+export const parseCredentials = (integration) => {
+	let obj = {};
+	integration.credentials.forEach(({ key, value }) => {
+		obj[key] = value
+	});
+	return obj;
+};

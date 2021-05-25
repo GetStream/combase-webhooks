@@ -3,18 +3,21 @@
 	"category": ["analytics"],
 	"icon": "./hubspot.png",
 	"configuration": {
-		"portalId": {
+		"apiKey": {
 			"type": "String",
 			"inputType": "text",
+			"label": "API Key",
 			"required": true
 		},
 		"propertyName": {
 			"type": "String",
 			"inputType": "text",
+			"label": "Custom Property Name",
+			"initialValue": "combase",
 			"required": true
 		}
 	},
-	"configDescription": "Enter your Hubspot Portal ID and the custom property name you created.",
+	"configDescription": "Enter your Hubspot API Key and the custom property name you created in the Hubspot dashboard.",
 	"triggers": {
 		"chat:channel.created": "onChannelCreated"
 	}

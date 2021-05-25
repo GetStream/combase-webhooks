@@ -1,45 +1,53 @@
+import { integrationFinder, parseCredentials } from '@combase.app/integration-finder';
 import Hubspot from 'hubspot';
 
-export const onChannelCreated = async (event, {gql, log, request}) => {
-	// TODO: Get API Key, Portal ID and "combase" property name from integration in mongo
-	// TODO: Also add setup instructions for the above in about.md
-	const hubspot = new Hubspot({ 
-		apiKey: 'API_KEY'
-	});
-
+export const onChannelCreated = async (event, actions) => {
+	const { log } = actions;
 	try {
 		const { user } = event.data.body;
 
-		const properties = [
-			{
-				property: "email",
-				value: user.email, 
-			},
-			{
-				property: "combase",
-				value: true, 
-			}
-		];
+		const integration = await integrationFinder('hubspot', event, actions);
 
-		const [firstname, lastname] = user.name.split(' ').map(part => part?.trim?.() || "");
+		if (integration) {
+			const credentials = parseCredentials(integration)
 
-		properties.push({ 
-			property: "firstname",
-			value: firstname, 
-		})
+			// TODO: Get API Key, Portal ID and "combase" property name from integration in mongo
+			// TODO: Also add setup instructions for the above in about.md
+			const hubspot = new Hubspot({ 
+				apiKey: credentials.apiKey
+			});
 
-		if (lastname) {
+			const properties = [
+				{
+					property: "email",
+					value: user.email, 
+				},
+				{
+					property: credentials.propertyName,
+					value: true, 
+				}
+			];
+
+			const [firstname, lastname] = user.name.split(' ').map(part => part?.trim?.() || "");
+
 			properties.push({ 
-				property: "lastname",
-				value: lastname, 
+				property: "firstname",
+				value: firstname, 
 			})
+
+			if (lastname) {
+				properties.push({ 
+					property: "lastname",
+					value: lastname, 
+				})
+			}
+
+			await hubspot.contacts.create({
+				properties	
+			});
 		}
 
-		await hubspot.contacts.create({
-			properties	
-		});
-
-	} catch (error) {
 		log.error(error.message);
+	} catch (error) {
 	}
 };

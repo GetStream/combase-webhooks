@@ -1,4 +1,4 @@
-import {integrationFinder} from '@combase.app/integration-finder';
+import {integrationFinder, parseCredentials} from '@combase.app/integration-finder';
 import Analytics from 'analytics'
 import googleAnalytics from '@analytics/google-analytics'
 
@@ -7,11 +7,11 @@ export const trackChatEvent = async (event, actions) => {
 	
 	const user = body.user || body.message?.user || body?.channel?.created_by;
 
-	const foundIntegration = await integrationFinder('google-analytics', event, actions);
+	const integration = await integrationFinder('google-analytics', event, actions);
 
-	if (foundIntegration) {
-		const [integration, credentials] = foundIntegration;
-		
+	if (integration) {
+		const credentials = parseCredentials(integration);
+
 		const analytics = Analytics({
 			app: 'combase',
 			plugins: [
