@@ -15,5 +15,5 @@
 	"ticket": ["created", "deleted", "updated", "archived", "labelled", "assigned", "tagged", "unassigned"],
 	"user": ["created", "deleted", "updated"],
 	"webhook": ["created", "deleted", "updated"],
-	"zendesk": ["pull", "channelback", "clickthrough"]
+	"zendesk": ["push", "pull", "channelback", "clickthrough"]
 }

@@ -14,8 +14,7 @@
 			"trigger": ["zendesk.push"],
 			"payload": {
 				"Ticket": ["_id"]
-			},
-			"permissions": ["*"]
+			}
 		}
 	]
 }
