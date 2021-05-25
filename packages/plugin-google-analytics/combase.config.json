@@ -1,11 +1,14 @@
 {
 	"name": "Google Analytics",
+	"description": "Track events in Combase through Google Analytics.", 
 	"category": ["analytics"],
 	"icon": "./ga.jpg",
 	"configuration": {
 		"trackingId": {
 			"type": "String",
 			"inputType": "text",
+			"label": "Tracking ID",
+			"placeholder": "UA-XXXXXXXXX-X",
 			"required": true
 		}
 	},

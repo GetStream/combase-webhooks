@@ -45,12 +45,12 @@ const resolvePlugin = pluginName => {
 	return {
 		...configJSON,
 		about,
+		id: packageJSON.name.replace('@combase.app/plugin-', ''),
 		// icon,
 		internal: {
 			...internal,
 			hash: hashPkg(packageJSON),
 		},
-		id: uuid(),
 	};
 };
 

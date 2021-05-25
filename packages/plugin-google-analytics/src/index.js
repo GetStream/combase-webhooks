@@ -1,31 +1,36 @@
+import {integrationFinder} from '@combase.app/integration-finder';
 import Analytics from 'analytics'
 import googleAnalytics from '@analytics/google-analytics'
 
-const analytics = Analytics({
-	app: 'combase',
-	plugins: [
-	  googleAnalytics({
-		trackingId: 'UA-197461081-1', // TODO - move inside the handler and grab tracking id from org integration creds
-	  })
-	]
-  });
-
-export const trackChatEvent = async (event) => {
+export const trackChatEvent = async (event, actions) => {
 	const { data: { body }, trigger } = event;
 	
 	const user = body.user || body.message?.user || body?.channel?.created_by;
 
-	/* Track event in GA with the trigger string as the event name */
-	await analytics.track(trigger, {
-		createdAt: body.created_at,
-	});
+	const foundIntegration = await integrationFinder('google-analytics', event, actions);
+
+	if (foundIntegration) {
+		const [integration, credentials] = foundIntegration;
+		
+		const analytics = Analytics({
+			app: 'combase',
+			plugins: [
+			  googleAnalytics(credentials)
+			]
+		  });
 	
-	/* Identify the user */
-	if (user) {
-		await analytics.identify(user.id, {
-			combaseId: user.id,
-			name: user.name,
-			email: user.email,
+		/* Track event in GA with the trigger string as the event name */
+		await analytics.track(trigger, {
+			createdAt: body.created_at,
 		});
+		
+		/* Identify the user */
+		if (user) {
+			await analytics.identify(user.id, {
+				combaseId: user.id,
+				name: user.name,
+				email: user.email,
+			});
+		}
 	}
 };

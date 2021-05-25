@@ -6,4 +6,16 @@
 	"triggers": {
 		"zendesk.push": "pushToZendesk"
 	},
+	"actions": [
+		{
+			"location": ["detail"],
+			"label": "Escalate to Zendesk",
+			"description": "Escalate to Zendesk transfers a chat ticket from Combase to Zendesk.",
+			"trigger": ["zendesk.push"],
+			"payload": {
+				"Ticket": ["_id"]
+			},
+			"permissions": ["*"]
+		}
+	]
 }
