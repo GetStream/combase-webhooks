@@ -1,56 +1,5 @@
 import p from 'phin';
-
-const parseCredentials = (integration) => {
-	let obj = {};
-	integration.credentials.forEach(({ key, value }) => {
-		obj[key] = value
-	});
-	return obj;
-};
-
-/**
- * Checks that an integration exists for the authenticated Organization,
- * and that it is enabled.
- * 
- * Can be used by any plugin, just pass along all arguments from the trigger method.
- * If truthy, the Organization has a valid & enabled integration relating to the current event.
- * If falsy, we can safely ignore the incoming event. 
- * 
- * @param {*} event 
- * @param {*} actions 
- * @returns integration data
- */
-export const lookupIntegration = async ({ data: { organization, trigger } }, { gql, log, request }) => {
-	try {
-		//? TODO: validate trigger again
-		const data = await request(gql`
-			query lookupIntegration($organization: MongoID!, $triggers: [String!]) {
-				integrationLookup(organization: $organization, triggers: $triggers) {
-					_id
-					name
-					enabled
-					credentials {
-						key: name
-						value
-					}
-				}
-			}
-		`, 
-			{
-				organization,
-				triggers: ['zendesk.pull', 'zendesk.channelback']
-			}
-		);
-
-		if (data?.integrationLookup?.enabled) {
-			return data?.integrationLookup;
-		}
-
-		return undefined;
-	} catch (error) {
-		log.error(error.message)
-	}
-}
+import { integrationFinder, parseCredentials } from '@combase.app/integration-finder';
 
 /**
  * Create a new ticket in Zendesk when a ticket is created in Combase
@@ -60,11 +9,11 @@ export const lookupIntegration = async ({ data: { organization, trigger } }, { g
  * @param {*} actions 
  */
 export const pushToZendesk = async (event, actions) => {
-	const integration = await lookupIntegration(event, actions);
-
 	const { data } = event; 
 	const { gql, request, log } = actions;
 
+	const integration = await integrationFinder('zendesk', event, actions);
+	
 	if (integration) {
 		const { channel_id, created_at, message, user } = data.body; // Stream channel.created payload.
 		const {
