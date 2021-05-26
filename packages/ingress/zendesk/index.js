@@ -15,10 +15,10 @@ router.get('/channel/manifest', (req, res) => {
 		"name": "Combase Channel",
 		"id": "combase-channel-1a2b3c",
 		"author":  "Stream",
-		"version": "0.0.5",
+		"version": "0.0.6",
 		"channelback_files": true,
 		"create_followup_tickets": false,
-		"push_client_id": "combase_by_stream",
+		"push_client_id": "combase_dev",
 		"urls": {
 			"admin_ui": "https://combase-webhooks.ngrok.io/zendesk/channel/admin-ui",
 			"pull_url": "https://combase-webhooks.ngrok.io/zendesk/channel/pull",
@@ -97,32 +97,26 @@ router.post('/channel/confirm', async (req, res) => {
 			}
 		);
 
-		const record = {
-			name:"Zendesk",
-			enabled: true,
-			credentials: [
-				{
-					name: "subdomain",
-					value: subdomain
-				},
-				{
-					name: "instance_push_id",
-					value: instance_push_id
-				},
-				{
-					name: "access_token",
-					value: zendesk_access_token,
-				}
-			],
-			triggers: ["zendesk.pull", "zendesk.channelback", "zendesk.clickthrough"],
-			organization: organization_id,
-		}
+		const credentials = [
+			{
+				name: "subdomain",
+				value: subdomain
+			},
+			{
+				name: "instance_push_id",
+				value: instance_push_id
+			},
+			{
+				name: "access_token",
+				value: zendesk_access_token,
+			}
+		];
 
 		// TODO: If updating the integration in Zendesk - this should be integrationUpdate...
 		const createIntegration = await graphql.request(
 			gql`
-				mutation createZendeskIntegration($record: CreateOneIntegrationInput!) {
-					integrationCreate(record: $record) {
+				mutation createZendeskIntegration($uid: String!, $credentials: [IntegrationCredentialsInput!], $enabled: Boolean) {
+					integrationCreate(uid: $uid, credentials: $credentials, enabled: $enabled) {
 						record {
 							_id
 						}
@@ -130,7 +124,9 @@ router.post('/channel/confirm', async (req, res) => {
 				}
 			`,
 			{
-				record
+				uid: 'zendesk',
+				credentials,
+				enabled: true,
 			},
 			{
 				['combase-organization']: organization_id

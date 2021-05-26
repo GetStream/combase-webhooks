@@ -39,7 +39,7 @@ export const combaseWebhookParser = async ({ headers, body, query }) => {
 		organization = body.to.split('@')[0];
 		trigger = 'email.receive';
 	} else if (query.trigger.startsWith('zendesk.')) {
-		organization = JSON.parse(body.metadata).organization_id;
+		organization = body?.metadata ? JSON.parse(body.metadata).organization_id : undefined;
 		trigger = query.trigger;
 	}
 

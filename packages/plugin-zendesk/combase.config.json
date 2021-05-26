@@ -2,7 +2,29 @@
 	"name": "Zendesk",
 	"category": ["sync", "tickets", "crm"],
 	"icon": "./zendesk.jpg",
-	"configuration": {},
+	"configuration": {
+		"subdomain": {
+			"type": "String",
+			"inputType": "text",
+			"label": "Subdomain",
+			"required": true,
+			"external": true
+		},
+		"instance_push_id": {
+			"type": "String",
+			"inputType": "text",
+			"label": "Instance Push ID",
+			"required": true,
+			"external": true
+		},
+		"access_token": {
+			"type": "String",
+			"inputType": "text",
+			"label": "Access Token",
+			"required": true,
+			"external": true
+		}
+	},
 	"triggers": {
 		"zendesk.push": "pushToZendesk"
 	},
