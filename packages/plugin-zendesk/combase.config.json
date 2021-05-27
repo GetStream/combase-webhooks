@@ -7,33 +7,31 @@
 			"type": "String",
 			"inputType": "text",
 			"label": "Subdomain",
-			"required": true,
-			"external": true
+			"required": true
 		},
-		"instance_push_id": {
+		"user": {
 			"type": "String",
 			"inputType": "text",
-			"label": "Instance Push ID",
-			"required": true,
-			"external": true
+			"label": "Admin User Email",
+			"required": true
 		},
-		"access_token": {
+		"api_token": {
 			"type": "String",
 			"inputType": "text",
-			"label": "Access Token",
-			"required": true,
-			"external": true
+			"label": "API Token",
+			"required": true
 		}
 	},
 	"triggers": {
-		"zendesk.push": "pushToZendesk"
+		"zendesk.push": "pushToZendesk",
+		"zendesk.escalate": "escalateToZendesk"
 	},
 	"actions": [
 		{
 			"location": ["detail"],
 			"label": "Escalate to Zendesk",
 			"description": "Escalate to Zendesk transfers a chat ticket from Combase to Zendesk.",
-			"trigger": ["zendesk.push"],
+			"trigger": ["zendesk.escalate"],
 			"payload": {
 				"Ticket": ["_id"]
 			}

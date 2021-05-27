@@ -1,9 +1,10 @@
 import p from 'phin';
 import { integrationFinder, parseCredentials } from '@combase.app/integration-finder';
 
+import { createZendeskClient } from './utils';
+
 /**
- * Create a new ticket in Zendesk when a ticket is created in Combase
- * chat:channel.created
+ * Endpoint to push content to zendesk through a zendesk channel integration.
  * 
  * @param {*} event 
  * @param {*} actions 
@@ -13,9 +14,28 @@ export const pushToZendesk = async (event, actions) => {
 	const { gql, request, log } = actions;
 
 	const integration = await integrationFinder('zendesk', event, actions);
-	
+	console.log('integration', integration);
+
 	if (integration) {
-		const { channel_id, created_at, message, user } = data.body; // Stream channel.created payload.
+		const { ticket: _id } = data.body; // Stream channel.created payload.
+
+		const {ticket} = await request(
+			gql`
+				query getTicket($_id: MongoID!) {
+					ticket(_id: $_id) {
+						createdAt
+						subject
+						user: userData {
+							_id
+							name
+							email
+						}
+					}
+				}
+			`,
+			{ _id }
+		);
+
 		const {
 			subdomain,
 			access_token,
@@ -23,7 +43,7 @@ export const pushToZendesk = async (event, actions) => {
 		} = parseCredentials(integration);
 
 		try {
-			const { body: zendeskTicket } = await p({
+			const {body: zendeskBody} = await p({
 				'method': 'POST',
 				'timeout': 2000,
 				parse: 'json',
@@ -35,19 +55,21 @@ export const pushToZendesk = async (event, actions) => {
 				data: {
 					instance_push_id,
 					external_resources: [{
-						external_id: channel_id,
-						message: message.text,
-						html_message: message.html,
-						created_at,
+						external_id: _id,
+						message: ticket.subject,
+						created_at: ticket.createdAt,
 						author: {
-							external_id: user.id,
-							name: user.name,
-							image_url: user.avatar,
+							external_id: ticket.user._id,
+							name: ticket.user.name,
 						},
 						allow_channelback: true,
 					}]
 				}
 			});
+
+			if (zendeskBody.error) {
+				console.error(zendeskBody.error);
+			}
 
 			// await request(gql`
 			// 	mutation updateTicketMeta($_id: MongoID!, $record: UpdateByIdTicketInput!) {
@@ -62,52 +84,113 @@ export const pushToZendesk = async (event, actions) => {
 	}
 };
 
-
 /**
- * Create a new agent in Zendesk when a new Combase agent is created
- * agent.created
+ * Create a new ticket in Zendesk
+ * chat:channel.created
  * 
  * @param {*} event 
  * @param {*} actions 
  */
-// export const syncAgentCreate = async (event, actions) => {
-// 	const integration = await lookupIntegration(event, actions);
+ export const escalateToZendesk = async (event, actions) => {
+	const integration = await integrationFinder('zendesk', event, actions);
 
-// 	const { data } = event; 
-// 	const { gql, request, log } = actions;
+	const { data } = event; 
+	const { gql, request, log } = actions;
 
-// 	if (integration) {
-// 		const client = createZendeskClient(integration);
-// 		const { fullDocument: agent } = data.body;
+	if (integration) {
+		const credentials = parseCredentials(integration);
+		const client = createZendeskClient(credentials);
+		const { ticket: _id } = data.body;
 
-// 		try {
-// 			const zendeskAgent = await client.users.create({
-// 				user: {
-// 					name: agent.name.full,
-// 					email: agent.email,
-// 					role: 'agent',
-// 					verified: true,
-// 				}
-// 			});
+		try {
+			const {ticket} = await request(
+				gql`
+					query getTicket($_id: MongoID!) {
+						ticket(_id: $_id) {
+							createdAt
+							subject
+							messages
+							user: userData {
+								_id
+								name
+								email
+								meta
+							}
+						}
+					}
+				`,
+				{ _id }
+			);
 
-// 			await request(gql`
-// 				mutation addAgentZendeskId($_id: MongoID!, $record: UpdateByIdAgentInput!) {
-// 					agentUpdate(_id: $_id, record: $record) {
-// 						record {
-// 							meta
-// 						}
-// 					}
-// 				}
-// 			`, { 
-// 				_id: agent._id, 
-// 				record: { 
-// 					meta: { 
-// 						zendeskId: zendeskAgent.id,
-// 					} 
-// 				}
-// 			});
-// 		} catch (error) {
-// 			log.error(error.message);
-// 		}
-// 	}
-// };
+			const user = ticket.user;
+			let existingUserId = user?.meta?.zendeskId;
+
+			if (!existingUserId) {
+				const zendeskUser = await client.users.create({
+					user: {
+						name: user.name,
+						email: user.email,
+						role: 'end-user',
+						verified: true,
+					}
+				});
+
+				await request(gql`
+					mutation addUserZendeskId($_id: MongoID!, $record: UpdateByIdUserInput!) {
+						userUpdate(_id: $_id, record: $record) {
+							record {
+								name
+								meta
+							}
+						}
+					}
+				`, { 
+					_id: user._id, 
+					record: { 
+						meta: { 
+							zendeskId: zendeskUser.id,
+						} 
+					}
+				});
+
+				existingUserId = zendeskUser.id;
+			}
+
+			const body = ticket.messages?.length ? ticket.messages.filter(({ type }) => type !== 'system').reduce((acc, { user, text }) => ([...acc, `${user.name}<${user.email}>:\n${text}`]), ['Original Transcript from Combase: \n\n']).join('\n\n') : ticket.subject;
+
+			const zendeskTicket = await client.tickets.create({
+				"ticket": {
+					"subject": ticket.subject,
+					"comment": {
+						"body": body
+					},
+					"external_id": _id,
+					"tags": ["combase"],
+					"submitter_id": existingUserId,
+					"requester_id": existingUserId,
+				},
+			});
+
+			await request(gql`
+				mutation updateTicketMeta($_id: MongoID!, $record: UpdateByIdTicketInput!, $status: EnumTicketStatus!) {
+					ticketUpdate(_id: $_id, record: $record) {
+						recordId
+					}
+					ticketMarkAs(_id: $_id, status: $status) {
+						recordId
+					}
+				}
+			`, { 
+				_id,
+				status: 'closed',
+				record: { 
+					meta: { 
+						zendeskId: zendeskTicket.id 
+					},
+				}
+			});
+		} catch (error) {
+			log.error(error.message);
+		}
+	}
+};
