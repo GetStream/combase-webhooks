@@ -115,8 +115,32 @@ class ChatCommandsHandler {
 		return undefined;
 	};
 
-	mark = () => {
-		return undefined
+	markas = async (body) => {
+		const { message } = body;
+
+		const {
+			organization,
+			ticket,
+		} = this.getEntitiesFromEvent(body);
+
+		const headers = {
+			'combase-organization': organization,
+		};
+
+		const status = message.args
+
+		await graphql.request(gql`
+			mutation markTicketAs($ticket: MongoID!, $status: EnumTicketStatus!) {
+				ticketMarkAs(_id: $ticket, status: $status) {
+					recordId
+				}
+			}
+		`, { ticket, status }, headers);
+
+		message.text = `Ticket marked as ${status}.`;
+		message.type = 'system';
+
+		return message;
 	};
 
 	faq = () => {
@@ -125,7 +149,7 @@ class ChatCommandsHandler {
 
 	middleware = async (req, res, next) => {
 		const { type } = req.query;
-
+		console.log(type);
 		try {
 			if (!type || typeof this[type] !== 'function') {
 				throw new Error('Unrecognized command.');

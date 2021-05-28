@@ -110,6 +110,7 @@ export const pushToZendesk = async (event, actions) => {
 							createdAt
 							subject
 							messages
+							agents
 							user: userData {
 								_id
 								name
@@ -172,17 +173,16 @@ export const pushToZendesk = async (event, actions) => {
 			});
 
 			await request(gql`
-				mutation updateTicketMeta($_id: MongoID!, $record: UpdateByIdTicketInput!, $status: EnumTicketStatus!) {
+				mutation updateTicketMeta($_id: MongoID!, $record: UpdateByIdTicketInput!, $agent: MongoID!, $text: String!) {
 					ticketUpdate(_id: $_id, record: $record) {
 						recordId
 					}
-					ticketMarkAs(_id: $_id, status: $status) {
-						recordId
-					}
+					ticketSendMessage(agent: $agent, ticket: $_id, text: $text)
 				}
 			`, { 
 				_id,
-				status: 'closed',
+				text: '/markas closed',
+				agent: ticket.agents[0],
 				record: { 
 					meta: { 
 						zendeskId: zendeskTicket.id 
