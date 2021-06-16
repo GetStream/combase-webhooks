@@ -1,11 +1,12 @@
 import 'dotenv/config';
 import nodemailer from 'nodemailer';
-import sgTransport from 'nodemailer-sendgrid-transport';
 
-export const emailTransport = nodemailer.createTransport(
-	sgTransport({
-		auth: {
-			api_key: process.env.SENDGRID_KEY,
-		},
-	})
-);
+export const emailTransport = nodemailer.createTransport({
+    host: 'smtp.sendgrid.net',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'apikey',
+        pass: process.env.SENDGRID_SMTP_PASS,
+    }
+});

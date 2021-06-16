@@ -16,6 +16,7 @@
 	},
 	"triggers": {
 		"ticket.assigned": "sendEmail",
-		"email.receive": "receiveEmail"
+		"email.receive": "receiveEmail",
+		"invitation.created": "sendInvitation"
 	}
 }

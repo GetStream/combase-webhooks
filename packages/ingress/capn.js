@@ -15,6 +15,7 @@ export const capn = new CaptainHook({
 	sources: [
 		createChangeStreamSource([
 			mongo.connection.db.collection('agents').watch(undefined, { fullDocument: 'updateLookup' }),
+			mongo.connection.db.collection('invitations').watch(undefined, { fullDocument: 'updateLookup' }),
 			mongo.connection.db.collection('users').watch(undefined, { fullDocument: 'updateLookup' }),
 			mongo.connection.db.collection('tickets').watch(undefined, { fullDocument: 'updateLookup' }),
 			mongo.connection.db.collection('organizations').watch(undefined, { fullDocument: 'updateLookup' }),

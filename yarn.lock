@@ -5808,6 +5808,19 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
+httpntlm@1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/httpntlm/-/httpntlm-1.6.1.tgz#ad01527143a2e8773cfae6a96f58656bb52a34b2"
+  integrity sha1-rQFScUOi6Hc8+uapb1hla7UqNLI=
+  dependencies:
+    httpreq ">=0.4.22"
+    underscore "~1.7.0"
+
+httpreq@>=0.4.22:
+  version "0.4.24"
+  resolved "https://registry.yarnpkg.com/httpreq/-/httpreq-0.4.24.tgz#4335ffd82cd969668a39465c929ac61d6393627f"
+  integrity sha1-QzX/2CzZaWaKOUZckprGHWOTYn8=
+
 https-proxy-agent@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-5.0.0.tgz#e2a90542abb68a762e0a0850f6c9edadfd8506b2"
@@ -8083,12 +8096,38 @@ node-zendesk@^2.0.6:
     querystring "0.2.x"
     request "2.88.2"
 
+nodemailer-fetch@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/nodemailer-fetch/-/nodemailer-fetch-1.6.0.tgz#79c4908a1c0f5f375b73fe888da9828f6dc963a4"
+  integrity sha1-ecSQihwPXzdbc/6IjamCj23JY6Q=
+
 nodemailer-sendgrid-transport@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/nodemailer-sendgrid-transport/-/nodemailer-sendgrid-transport-0.2.0.tgz#a516593bfe3d1f278cfe17060e1db23658a8f4fc"
   integrity sha1-pRZZO/49HyeM/hcGDh2yNlio9Pw=
   dependencies:
     sendgrid "^1.8.0"
+
+nodemailer-shared@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/nodemailer-shared/-/nodemailer-shared-1.1.0.tgz#cf5994e2fd268d00f5cf0fa767a08169edb07ec0"
+  integrity sha1-z1mU4v0mjQD1zw+nZ6CBae2wfsA=
+  dependencies:
+    nodemailer-fetch "1.6.0"
+
+nodemailer-smtp-transport@^2.7.4:
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/nodemailer-smtp-transport/-/nodemailer-smtp-transport-2.7.4.tgz#0d89af019a144a480fd8ecc99997d9f838f13685"
+  integrity sha1-DYmvAZoUSkgP2OzJmZfZ+DjxNoU=
+  dependencies:
+    nodemailer-shared "1.1.0"
+    nodemailer-wellknown "0.1.10"
+    smtp-connection "2.12.0"
+
+nodemailer-wellknown@0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/nodemailer-wellknown/-/nodemailer-wellknown-0.1.10.tgz#586db8101db30cb4438eb546737a41aad0cf13d5"
+  integrity sha1-WG24EB2zDLRDjrVGc3pBqtDPE9U=
 
 nodemailer@6.4.11:
   version "6.4.11"
@@ -9926,6 +9965,14 @@ smart-buffer@^4.1.0:
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.1.0.tgz#91605c25d91652f4661ea69ccf45f1b331ca21ba"
   integrity sha512-iVICrxOzCynf/SNaBQCw34eM9jROU/s5rzIhpOvzhzuYHfJR/DhZfDkXiZSgKXfgv26HT3Yni3AV/DGw0cGnnw==
 
+smtp-connection@2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/smtp-connection/-/smtp-connection-2.12.0.tgz#d76ef9127cb23c2259edb1e8349c2e8d5e2d74c1"
+  integrity sha1-1275EnyyPCJZ7bHoNJwujV4tdME=
+  dependencies:
+    httpntlm "1.6.1"
+    nodemailer-shared "1.1.0"
+
 smtpapi@^1.2.0:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/smtpapi/-/smtpapi-1.4.4.tgz#234ede65a0074a79edd2bb27dbc97d188a1e862d"
@@ -10810,6 +10857,11 @@ undefsafe@^2.0.3:
   integrity sha512-nrXZwwXrD/T/JXeygJqdCO6NZZ1L66HrxM/Z7mIq2oPanoN0F1nLx3lwJMu6AwJY69hdixaFQOuoYsMjE5/C2A==
   dependencies:
     debug "^2.2.0"
+
+underscore@~1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
+  integrity sha1-a7rwh3UA02vjTsqlhODbn+8DUgk=
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

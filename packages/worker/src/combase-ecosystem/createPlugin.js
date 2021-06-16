@@ -29,7 +29,7 @@ export const createPlugin = plugins =>
 				gql,
 				log: logger,
 				request: (document, variables) => graphql.request(document, variables, this.authenticateRequest(event)),
-				emailTransport,
+				email: emailTransport,
 			};
 		}
 

@@ -9,6 +9,7 @@
 	"faq": ["created", "deleted", "updated"],
 	"group": ["created", "deleted", "updated"],
 	"integration": ["created", "deleted", "updated"],
+	"invitation": ["created", "deleted", "updated"],
 	"note": ["created", "deleted", "updated"],
 	"organization": ["created", "deleted", "updated"],
 	"tag": ["created", "deleted", "updated"],

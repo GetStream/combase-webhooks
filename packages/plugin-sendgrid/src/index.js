@@ -53,3 +53,31 @@ export const sendEmail = async (event, { gql, log, request, emailTransport }) =>
 	
 	log.info(`✉️  Sent ${event.trigger} Email: ${to} • ${orgName}`);
 };
+
+export const sendInvitation = async (event, { gql, log, request, email }) => {
+	const { fullDocument: invitation } = event.data.body;
+
+	const data = await request(gql`
+		{
+			organization {
+				name
+			}
+		}
+	`)
+	
+	const { name } = data.organization
+	
+	const orgName = `${name.charAt(0).toUpperCase()}${name.slice(1)} Support`;
+
+	const emailData = {
+		to: invitation.to,
+		from: `no-reply@em8259.parse.combase.app`,
+		subject: 'Support Query',
+		text: 'Awesome sauce',
+		html: '<b>Awesome sauce</b>'
+	};
+
+	await email.sendMail(emailData);
+
+	log.info(`✉️  Sent ${event.trigger} Email: ${invitation.to} • ${orgName}`);
+};

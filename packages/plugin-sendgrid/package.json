@@ -23,7 +23,8 @@
     "@babel/runtime": "^7.12.5",
     "@sendgrid/inbound-mail-parser": "^7.4.2",
     "nodemailer": "^6.4.17",
-    "nodemailer-sendgrid-transport": "^0.2.0"
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "nodemailer-smtp-transport": "^2.7.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
