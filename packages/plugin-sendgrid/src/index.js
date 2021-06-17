@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 export const receiveEmail = async (event, { gql, log, request }) => {
 	const {user} = await request(gql`
 		mutation ($record: UserInput!) {
@@ -69,12 +71,24 @@ export const sendInvitation = async (event, { gql, log, request, email }) => {
 	
 	const orgName = `${name.charAt(0).toUpperCase()}${name.slice(1)} Support`;
 
+	const iat = Math.round(new Date(invitation.createdAt).valueOf() / 1000);
+
+	const token = jwt.sign({
+		org: invitation.organization,
+		iat,
+		exp: iat + 86400,
+		email: invitation.to,
+		access: invitation.access,
+	}, process.env.AUTH_SECRET);
+
+	const url = `https://support.combase.app/invite/?token=${token}`;
+
 	const emailData = {
 		to: invitation.to,
-		from: `no-reply@em8259.parse.combase.app`,
-		subject: 'Support Query',
-		text: 'Awesome sauce',
-		html: '<b>Awesome sauce</b>'
+		from: `${orgName} Support • Combase <no-reply@em8259.parse.combase.app>`,
+		subject: `You\'ve been invited to join ${orgName} on Combase.`,
+		text: `Join now: ${url}`,
+		html: `Join now: <a href="${url}">Click here</a>`
 	};
 
 	await email.sendMail(emailData);
