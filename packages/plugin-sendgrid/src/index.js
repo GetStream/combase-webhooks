@@ -30,7 +30,6 @@ export const receiveEmail = async (event, { gql, log, request }) => {
 	log.info(`🎟  Created Ticket ${data.ticket._id.toString()}`)
 };
 
-// TODO: Fix up issue with Sendgrid and uncomment this.
 export const sendEmail = async (event, { gql, log, request, emailTransport }) => {
 
 	const data = await request(gql`
@@ -60,17 +59,22 @@ export const sendInvitation = async (event, { gql, log, request, email }) => {
 	const { fullDocument: invitation } = event.data.body;
 
 	const data = await request(gql`
-		{
+		query ($agent: MongoID!) {
+			agent(_id: $agent) {
+				name {
+					display
+				}
+			}
+
 			organization {
 				name
 			}
 		}
-	`)
+	`, { agent: invitation.from })
 	
-	const { name } = data.organization
-	
-	const orgName = `${name.charAt(0).toUpperCase()}${name.slice(1)} Support`;
-
+	const { agent, organization } = data;
+	const { name: orgName } = organization;
+	const { name: { display: agentName } } = agent;
 	const iat = Math.round(new Date(invitation.createdAt).valueOf() / 1000);
 
 	const token = jwt.sign({
@@ -86,9 +90,9 @@ export const sendInvitation = async (event, { gql, log, request, email }) => {
 	const emailData = {
 		to: invitation.to,
 		from: `${orgName} Support • Combase <no-reply@em8259.parse.combase.app>`,
-		subject: `You\'ve been invited to join ${orgName} on Combase.`,
-		text: `Join now: ${url}`,
-		html: `Join now: <a href="${url}">Click here</a>`
+		subject: `${agentName} invited you to join ${orgName} on Combase.`,
+		text: `${agentName} invited you to the ${orgName} organization in Combase. Join now: ${url}`,
+		html: `<p>${agentName} invited you to the ${orgName} organization in Combase.</p><br/><p>Join now: <a href="${url}">Click here</a></p>`
 	};
 
 	await email.sendMail(emailData);
