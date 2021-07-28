@@ -1,6 +1,6 @@
 {
 	"name": "Autorouting",
-	"category": ["organization"],
+	"category": ["tickets"],
 	"icon": "./stream.jpg",
 	"configuration": {},
 	"triggers": {

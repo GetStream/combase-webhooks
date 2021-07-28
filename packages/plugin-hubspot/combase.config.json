@@ -1,6 +1,6 @@
 {
 	"name": "Hubspot",
-	"category": ["analytics"],
+	"category": ["crm", "analytics"],
 	"icon": "./hubspot.png",
 	"configuration": {
 		"apiKey": {

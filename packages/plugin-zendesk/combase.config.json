@@ -1,6 +1,6 @@
 {
 	"name": "Zendesk",
-	"category": ["sync", "tickets", "crm"],
+	"category": ["crm"],
 	"icon": "./zendesk.jpg",
 	"configuration": {
 		"subdomain": {

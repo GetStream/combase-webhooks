@@ -4,11 +4,13 @@
 	"icon": "./sendgrid.jpeg",
 	"configuration": {
 		"key": {
+			"label": "Key",
 			"type": "String",
 			"inputType": "password",
 			"required": true
 		},
 		"secret": {
+			"label": "Secret",
 			"type": "String",
 			"inputType": "password",
 			"required": true
