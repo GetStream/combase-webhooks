@@ -19,6 +19,7 @@
 	"triggers": {
 		"ticket.assigned": "sendEmail",
 		"email.receive": "receiveEmail",
-		"invitation.created": "sendInvitation"
+		"invitation.created": "sendInvitation",
+		"email.requestPasswordReset": "requestPasswordReset"
 	}
 }
