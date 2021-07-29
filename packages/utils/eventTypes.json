@@ -5,7 +5,7 @@
 		"channel": ["created"],
 		"message": ["new"]
 	},
-	"email": ["receive"],
+	"email": ["receive", "requestPasswordReset"],
 	"faq": ["created", "deleted", "updated"],
 	"group": ["created", "deleted", "updated"],
 	"integration": ["created", "deleted", "updated"],

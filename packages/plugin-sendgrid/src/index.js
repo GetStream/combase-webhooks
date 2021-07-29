@@ -99,3 +99,27 @@ export const sendInvitation = async (event, { gql, log, request, email }) => {
 
 	log.info(`✉️  Sent ${event.trigger} Email: ${invitation.to} • ${orgName}`);
 };
+
+export const requestPasswordReset = async (event, { gql, log, request, email }) => {
+	const { _id, name, email: to, organization } = event.data.body;
+	const iat = Math.round(new Date().valueOf() / 1000);
+
+	const token = jwt.sign({
+		org: organization,
+		iat,
+		exp: iat + 86400,
+		sub: _id,
+	}, process.env.AUTH_SECRET);
+
+	const url = `https://support.combase.app/new-password/?token=${token}`;
+
+	const emailData = {
+		to,
+		from: `Support • Combase <no-reply@em8259.parse.combase.app>`,
+		subject: `Change your password`,
+		text: `Text`,
+		html: `${url}`
+	};
+
+	await email.sendMail(emailData);
+};

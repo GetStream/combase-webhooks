@@ -14,7 +14,6 @@ export const pushToZendesk = async (event, actions) => {
 	const { gql, request, log } = actions;
 
 	const integration = await integrationFinder('zendesk', event, actions);
-	console.log('integration', integration);
 
 	if (integration) {
 		const { ticket: _id } = data.body; // Stream channel.created payload.
