@@ -1,6 +1,6 @@
 {
   "name": "@combase.app/plugin-google-analytics",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Track Combase events in Google Analytics.",
   "author": "Stream.io, Inc.",
   "private": false,

@@ -1,6 +1,6 @@
 {
   "name": "@combase.app/integration-finder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Find & Verify Combase Integrations from the event object, and ensure they are enabled for the related organization.",
   "author": "Stream.io, Inc.",
   "private": false,

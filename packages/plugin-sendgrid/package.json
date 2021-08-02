@@ -1,6 +1,6 @@
 {
   "name": "@combase.app/plugin-sendgrid",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "SendGrid email support for Combase.",
   "author": "Stream.io, Inc.",
   "private": false,

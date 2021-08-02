@@ -1,6 +1,6 @@
 {
   "name": "@combase.app/plugin-zendesk",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Zendesk sync for Combase.",
   "author": "Stream.io, Inc.",
   "private": false,

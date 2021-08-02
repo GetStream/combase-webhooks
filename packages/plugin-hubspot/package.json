@@ -1,6 +1,6 @@
 {
   "name": "@combase.app/plugin-hubspot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Track contacts in Hubspot.",
   "author": "Stream.io, Inc.",
   "private": false,
