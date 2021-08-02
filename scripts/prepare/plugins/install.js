@@ -17,6 +17,7 @@ export const installPlugins = async () => {
 
 		await subprocess;
 	} catch (error) {
+		console.log(error.message);
 		process.exit(1);
 	}
 }
