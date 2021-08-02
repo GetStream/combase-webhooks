@@ -3,11 +3,10 @@ import { dataDir, manifest } from 'utils';
 
 import config from '../../combase.config.json';
 
-import { installPlugins, loadPlugins } from './plugins';
+import { loadPlugins } from './plugins';
 
 try {
 	await fs.ensureDir(dataDir);
-	await installPlugins();
 	const plugins = await loadPlugins(config);
 
 	await fs.writeFile(manifest, JSON.stringify(plugins));
