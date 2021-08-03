@@ -1,7 +1,7 @@
-//TODO: Doesn't run rn because we symlink the plugins
 import execa from 'execa';
 
 import config from '../../../combase.config.json';
+import { logger } from '../../../packages/utils';
 
 const { plugins } = config;
 
@@ -10,14 +10,14 @@ if (plugins.length === 0 || !plugins || !Array.isArray(plugins)) {
 }
 
 export const installPlugins = async () => {
-	const subprocess = execa('yarn', ['add', ...plugins]);
+	const subprocess = execa('yarn', ['workspace', 'worker', 'add', ...plugins]);
 
 	try {
 		subprocess.stdout.pipe(process.stdout);
 
 		await subprocess;
 	} catch (error) {
-		console.log(error.message);
+		logger.error(error.message);
 		process.exit(1);
 	}
 }
