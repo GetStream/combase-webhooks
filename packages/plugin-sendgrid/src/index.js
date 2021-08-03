@@ -85,7 +85,7 @@ export const sendInvitation = async (event, { gql, log, request, email }) => {
 		access: invitation.access,
 	}, process.env.AUTH_SECRET);
 
-	const url = `https://support.combase.app/invite/?token=${token}`;
+	const url = `https://support.combase.app/auth/invite/?token=${token}`;
 
 	const emailData = {
 		to: invitation.to,
