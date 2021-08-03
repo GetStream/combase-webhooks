@@ -1,1 +1,1 @@
-worker: yarn start:worker
+worker: yarn plugins:build && yarn start:worker
