@@ -9,6 +9,7 @@ import { createEcosystemPlugins } from "./combase-ecosystem";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const manifest = JSON.parse(fs.readFileSync(createPath([__dirname, '../../../', '.data', 'integration-manifest.json'])));
+
 const plugins = await createEcosystemPlugins(manifest);
 
 const capn = new CaptainHook({

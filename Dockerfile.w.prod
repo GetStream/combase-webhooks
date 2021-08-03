@@ -14,5 +14,3 @@ COPY yarn.lock .
 # COPY combase.config.json combase.config.json
 
 RUN yarn && yarn plugins:build
-
-CMD [ "yarn", "dev:worker" ]

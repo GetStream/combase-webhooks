@@ -1,0 +1,7 @@
+build:
+  docker:
+    web: Dockerfile.i.prod
+    worker: Dockerfile.w.prod
+run:
+  web: yarn start:ingress
+  worker: yarn start:worker

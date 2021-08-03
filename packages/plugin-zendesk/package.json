@@ -9,10 +9,11 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "main": "index.js",
+  "module": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/GetStream/combase-webhooks.git",
-    "directory": "packages/plugin-sendgrid"
+    "directory": "packages/plugin-zendesk"
   },
   "scripts": {
     "build": "babel src --out-dir . --ignore \"**/__tests__\"",
