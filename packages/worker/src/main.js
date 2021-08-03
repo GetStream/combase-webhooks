@@ -11,6 +11,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const manifest = JSON.parse(fs.readFileSync(createPath([__dirname, '../../../', '.data', 'integration-manifest.json'])));
 const plugins = await createEcosystemPlugins(manifest);
 
+console.log(plugins);
+
 const capn = new CaptainHook({
 	engine: await CaptainRascalEngine.create(consumerConfig, true),
 	logger,

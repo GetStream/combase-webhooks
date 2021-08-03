@@ -7,7 +7,7 @@ import { installPlugins, loadPlugins } from './plugins';
 
 try {
 	await fs.ensureDir(dataDir);
-	await installPlugins();
+	// await installPlugins();
 	const plugins = await loadPlugins(config);
 
 	await fs.writeFile(manifest, JSON.stringify(plugins));

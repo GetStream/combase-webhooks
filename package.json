@@ -42,9 +42,7 @@
 		"plugins:publish:dry-run": "yarn clean --verbose && lerna exec --scope '@combase.app/*' --parallel -- yarn prepare && lerna version --no-private",
 		"plugins:publish:release": "yarn clean --verbose && lerna exec --scope '@combase.app/*' --parallel -- yarn prepare && lerna publish --no-private",
 		"plugins:publish": "echo \"Use 'yarn publish:release' instead of 'yarn run publish'\"",
-		"plugins:watch": "lerna exec --parallel --scope '@combase.app/!(babel-preset-combase-plugin)' -- yarn watch",
-		"plugins:link:all": "lerna exec --parallel --scope '@combase.app/!(babel-preset-combase-plugin)' -- yarn link",
-		"plugins:unlink:all": "lerna exec --parallel --scope '@combase.app/!(babel-preset-combase-plugin)' -- yarn unlink"
+		"plugins:watch": "lerna exec --parallel --scope '@combase.app/!(babel-preset-combase-plugin)' -- yarn watch"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.13.10",

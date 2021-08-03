@@ -4,7 +4,7 @@ export const createEcosystemPlugins = async (manifest) => {
 	let pluginConfigs = manifest;
 
 	pluginConfigs = await Promise.all(pluginConfigs.map(async (config) => {
-		const { internal: { name, path } } = config;
+		const { internal: { name } } = config;
 
 		const pluginModule = await import(name);
 		return {
