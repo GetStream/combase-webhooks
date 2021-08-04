@@ -8,9 +8,6 @@ COPY . .
 # Install app dependencies
 COPY package.json .
 COPY yarn.lock .
-# COPY scripts scripts
-# COPY packages/worker packages/worker
-# COPY packages/utils packages/utils
-# COPY combase.config.json combase.config.json
 
+# in prod we need to build the plugins before running the worker.
 RUN yarn && yarn plugins:build
